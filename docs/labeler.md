@@ -14,7 +14,7 @@ There are few official tutorials, so refer to starter kits for other languages.
 Here is sample Labeler.
 
 - https://bsky.app/profile/laralabeler.bsky.social
-- https://github.com/kawax/laralabeler
+- https://github.com/invokable/laralabeler
 
 ## Caution
 
