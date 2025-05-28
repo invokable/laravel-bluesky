@@ -151,8 +151,8 @@ To authenticate with OAuth, read the Socialite documentation.
 - [Labeler](./docs/labeler.md)
 
 ## Sample project
-- [Labeler](https://github.com/kawax/laralabeler)
-- [Statusphere Laravel edition](https://github.com/puklipo/statusphere)
+- [Labeler](https://github.com/invokable/laralabeler)
+- [Statusphere Laravel edition](https://github.com/invokable/statusphere)
 
 ## Contracts
 https://github.com/kawax/atproto-lexicon-contracts
