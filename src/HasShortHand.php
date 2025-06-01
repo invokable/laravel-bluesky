@@ -469,7 +469,7 @@ trait HasShortHand
     #[ArrayShape(['did' => 'string', 'error' => 'string', 'jobId' => 'string', 'message' => 'string', 'state' => 'string'])]
     public function uploadVideo(StreamInterface|string $data, #[KnownValues(['video/mp4', 'video/mpeg', 'video/webm', 'video/quicktime', 'image/gif'])] string $type = 'video/mp4'): Response
     {
-        //Service auth is required to use the video upload features.
+        // Service auth is required to use the video upload features.
         $aud = $this->agent()?->session()->didDoc()->serviceAuthAud();
         throw_if(empty($aud), AuthenticationException::class);
 

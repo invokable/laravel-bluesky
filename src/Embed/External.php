@@ -35,8 +35,7 @@ final class External extends AbstractExternal implements Arrayable
         private readonly string $description,
         #[Format('uri')] private readonly string $uri,
         #[Blob(accept: ['image/*'], maxSize: 1000000)] private readonly null|array|BlobRef|Closure $thumb = null,
-    ) {
-    }
+    ) {}
 
     public static function create(string $title, string $description, string $uri, null|array|BlobRef|Closure $thumb = null): self
     {

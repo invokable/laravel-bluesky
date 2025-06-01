@@ -18,13 +18,12 @@ use Revolution\Bluesky\Session\LegacySession;
  */
 final class LegacyAgent implements Agent
 {
-    use Macroable;
     use Conditionable;
+    use Macroable;
 
     public function __construct(
         protected LegacySession $session,
-    ) {
-    }
+    ) {}
 
     public static function create(LegacySession $session): self
     {

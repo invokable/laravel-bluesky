@@ -20,15 +20,14 @@ use Revolution\Bluesky\Contracts\XrpcClient;
  *
  * chat.bsky
  */
-class ChatClient implements XrpcClient, Actor, Convo, Moderation
+class ChatClient implements Actor, Convo, Moderation, XrpcClient
 {
-    use Macroable;
-    use Conditionable;
-    use HasHttp;
-
     use ChatBskyActor;
     use ChatBskyConvo;
     use ChatBskyModeration;
+    use Conditionable;
+    use HasHttp;
+    use Macroable;
 
     public const CHAT_SERVICE_DID = 'did:web:api.bsky.chat#bsky_chat';
 }

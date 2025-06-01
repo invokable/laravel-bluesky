@@ -21,10 +21,9 @@ use Revolution\Bluesky\Client\Concerns\ToolsOzoneTeam;
 use Revolution\Bluesky\Client\HasHttp;
 use Revolution\Bluesky\Contracts\XrpcClient;
 
-class OzoneClient implements XrpcClient, Communication, Moderation, Server, Set, Setting, Signature, Team
+class OzoneClient implements Communication, Moderation, Server, Set, Setting, Signature, Team, XrpcClient
 {
     use HasHttp;
-
     use ToolsOzoneCommunication;
     use ToolsOzoneModeration;
     use ToolsOzoneServer;

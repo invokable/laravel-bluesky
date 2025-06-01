@@ -13,8 +13,7 @@ final readonly class ReplyRef implements Arrayable
     public function __construct(
         protected StrongRef $root,
         protected StrongRef $parent,
-    ) {
-    }
+    ) {}
 
     public static function to(StrongRef $root, StrongRef $parent): self
     {

@@ -48,7 +48,7 @@ class BlueskyChannel
                 ->post($post),
             $route->isLegacy() => Bluesky::login($route->identifier ?? '', $route->password ?? '')
                 ->post($post),
-            default => throw new RuntimeException(),
+            default => throw new RuntimeException,
         };
     }
 }

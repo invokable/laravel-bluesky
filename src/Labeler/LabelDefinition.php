@@ -25,8 +25,7 @@ final readonly class LabelDefinition implements Arrayable
         #[KnownValues(['ignore', 'warn', 'hide'])]
         private string $defaultSetting = 'warn',
         private bool $adultOnly = false,
-    ) {
-    }
+    ) {}
 
     public static function make(
         string $identifier,

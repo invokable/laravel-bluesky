@@ -16,12 +16,12 @@ use Revolution\Bluesky\Client\HasHttp;
 use Revolution\Bluesky\Contracts\XrpcClient;
 use Symfony\Component\Mime\MimeTypes;
 
-class VideoClient implements XrpcClient, Video
+class VideoClient implements Video, XrpcClient
 {
-    use Macroable;
+    use AppBskyVideo;
     use Conditionable;
     use HasHttp;
-    use AppBskyVideo;
+    use Macroable;
 
     protected const VIDEO_ENDPOINT = 'https://video.bsky.app/xrpc/';
 

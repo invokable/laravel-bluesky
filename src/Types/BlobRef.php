@@ -12,7 +12,7 @@ final class BlobRef extends AbstractBlob implements Arrayable
 {
     public static function make(#[Format('cid')] string $link, string $mimeType, int $size): self
     {
-        $self = new self();
+        $self = new self;
 
         $self->link = $link;
         $self->mimeType = $mimeType;
@@ -26,7 +26,7 @@ final class BlobRef extends AbstractBlob implements Arrayable
      */
     public static function fromArray(array $blob): self
     {
-        $self = new self();
+        $self = new self;
 
         $self->link = data_get($blob, 'ref.$link');
         $self->mimeType = data_get($blob, 'mimeType');

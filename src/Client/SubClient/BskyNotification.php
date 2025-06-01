@@ -9,9 +9,8 @@ use Revolution\Bluesky\Client\Concerns\AppBskyNotification;
 use Revolution\Bluesky\Client\HasHttp;
 use Revolution\Bluesky\Contracts\XrpcClient;
 
-class BskyNotification implements XrpcClient, Notification
+class BskyNotification implements Notification, XrpcClient
 {
-    use HasHttp;
-
     use AppBskyNotification;
+    use HasHttp;
 }

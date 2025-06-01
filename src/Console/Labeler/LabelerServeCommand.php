@@ -43,8 +43,6 @@ class LabelerServeCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
     public function handle(LabelerServer $labeler, JetstreamServer $jetstream, FirehoseServer $firehose): int
     {

@@ -15,9 +15,9 @@ use Revolution\Bluesky\Types\SelfLabels;
 
 final class Generator extends AbstractGenerator implements Arrayable, Recordable
 {
+    use Conditionable;
     use HasRecord;
     use Macroable;
-    use Conditionable;
     use Tappable;
 
     public function __construct(string $did, string $displayName)

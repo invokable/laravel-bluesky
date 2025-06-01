@@ -27,14 +27,13 @@ use Revolution\Bluesky\Support\Identity;
  */
 final class OAuthAgent implements Agent
 {
-    use Macroable;
     use Conditionable;
+    use Macroable;
 
     public function __construct(
         #[\SensitiveParameter]
         protected OAuthSession $session,
-    ) {
-    }
+    ) {}
 
     public static function create(#[\SensitiveParameter] OAuthSession $session): self
     {

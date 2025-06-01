@@ -79,7 +79,7 @@ final class Decoder
             25 => $this->readUint16(),
             26 => $this->readUint32(),
             27 => $this->readUint64(),
-            default => throw new InvalidArgumentException(),
+            default => throw new InvalidArgumentException,
         };
     }
 
@@ -127,7 +127,7 @@ final class Decoder
         $lo = $arr[2];
 
         if ($hi > 0x1FFFFF) {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException;
         }
 
         return ($hi * (2 ** 32)) + $lo;
@@ -220,10 +220,10 @@ final class Decoder
                 21 => true,
                 22 => null,
                 27 => $this->readFloat64(),
-                default => throw new InvalidArgumentException(),
+                default => throw new InvalidArgumentException,
             };
         }
 
-        throw new InvalidArgumentException();
+        throw new InvalidArgumentException;
     }
 }

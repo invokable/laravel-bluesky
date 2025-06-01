@@ -71,7 +71,7 @@ final class JetstreamServer
             'maxMessageSizeBytes' => $maxMessageSizeBytes,
         ];
 
-        $worker = new Worker();
+        $worker = new Worker;
 
         $worker->onWorkerStart = function ($worker) {
             $options = collect($this->payload)

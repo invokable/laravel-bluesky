@@ -12,7 +12,7 @@ final class Images extends AbstractImages implements Arrayable
 {
     public static function create(): self
     {
-        return new self();
+        return new self;
     }
 
     /**
@@ -34,7 +34,6 @@ final class Images extends AbstractImages implements Arrayable
      * })
      * ```
      *
-     * @param  BlobRef|array|callable  $blob
      * @param  ?array{width: int|string, height: int|string}  $aspectRatio
      */
     public function add(string $alt, BlobRef|array|callable $blob, ?array $aspectRatio = null): self

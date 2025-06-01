@@ -46,7 +46,7 @@ class BlueskyPrivateChannel
         $id = match (true) {
             $route->isOAuth() => $this->oauth($route),
             $route->isLegacy() => $this->legacy($route),
-            default => throw new RuntimeException(),
+            default => throw new RuntimeException,
         };
 
         return Bluesky::client(auth: true)

@@ -12,9 +12,7 @@ use Illuminate\Contracts\Support\Jsonable;
  */
 final readonly class AtBytes implements Arrayable, Jsonable
 {
-    public function __construct(protected string $bytes)
-    {
-    }
+    public function __construct(protected string $bytes) {}
 
     /**
      * ```

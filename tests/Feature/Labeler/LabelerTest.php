@@ -30,7 +30,7 @@ class LabelerTest extends TestCase
 
         $label = CBOR::normalize($label);
 
-        uksort($label, new MapKeySort());
+        uksort($label, new MapKeySort);
 
         $cbor = CBOR::encode($label);
 

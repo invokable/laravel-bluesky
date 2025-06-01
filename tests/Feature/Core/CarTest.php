@@ -29,7 +29,7 @@ class CarTest extends TestCase
         $roots = iterator_to_array(CAR::decodeRoots($data));
         $blocks = iterator_to_array(CAR::blockIterator($data));
 
-        //dump($blocks);
+        // dump($blocks);
         $this->assertCount(2, $roots);
         $this->assertCount(8, $blocks);
         $this->assertArrayHasKey('bafyreihyrpefhacm6kkp4ql6j6udakdit7g3dmkzfriqfykhjw6cad5lrm', $blocks);
@@ -120,7 +120,7 @@ class CarTest extends TestCase
         $data = Utils::streamFor(Utils::tryFopen(__DIR__.'/fixture/bsky-app.car', 'rb'));
 
         foreach (CAR::blockIterator($data) as $cid => $block) {
-            //dump($cid, $block);
+            // dump($cid, $block);
             $this->assertNotEmpty($cid);
             $this->assertNotEmpty($block);
         }
@@ -131,9 +131,9 @@ class CarTest extends TestCase
         $data = Utils::streamFor(Utils::tryFopen(__DIR__.'/fixture/bsky-app.car', 'rb'));
 
         $header_len = Varint::decode($data->read(1));
-        //dump($header_len);
+        // dump($header_len);
         $header = CBOR::decode($data->read($header_len));
-        //dump($header);
+        // dump($header);
 
         $data->seek(1 + $header_len);
 
@@ -166,7 +166,7 @@ class CarTest extends TestCase
 
         $current = $data->tell();
 
-        //2
+        // 2
         $data_len = Varint::decode($data->read(8));
         $pos = strlen(Varint::encode($data_len));
         $data->seek($current + $pos);
@@ -196,7 +196,7 @@ class CarTest extends TestCase
 
         $current = $data->tell();
 
-        //3
+        // 3
         $data_len = Varint::decode($data->read(8));
         $pos = strlen(Varint::encode($data_len));
         $data->seek($current + $pos);
@@ -224,7 +224,7 @@ class CarTest extends TestCase
         $this->assertCount(744, iterator_to_array(CAR::blockIterator($data)));
 
         foreach (CAR::blockMap($data) as $key => $record) {
-            //dump($key, $record);
+            // dump($key, $record);
             $this->assertTrue(Str::contains($key, '/'));
             $this->assertTrue(Arr::exists($record, 'uri'));
         }
@@ -264,7 +264,7 @@ class CarTest extends TestCase
         $sign = $sk->privateKey()->sign($unsigned_cbor);
 
         $signed = array_merge($unsigned, ['sig' => ['$bytes' => base64_encode($sign)]]);
-        uksort($signed, new MapKeySort());
+        uksort($signed, new MapKeySort);
 
         $this->assertTrue(CAR::verifySignedCommit($signed, $sk->publicPEM()));
 

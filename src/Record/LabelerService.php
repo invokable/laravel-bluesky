@@ -14,16 +14,16 @@ use Revolution\Bluesky\Contracts\Recordable;
 
 final class LabelerService extends AbstractService implements Arrayable, Recordable
 {
+    use Conditionable;
     use HasRecord;
     use Macroable;
-    use Conditionable;
     use Tappable;
 
     public static function fromArray(null|Collection|array $service): self
     {
         $profile = Collection::make($service ?? []);
 
-        $self = new self();
+        $self = new self;
 
         $profile->each(function ($value, $name) use ($self) {
             if (property_exists($self, $name)) {

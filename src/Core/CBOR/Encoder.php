@@ -217,11 +217,11 @@ final class Encoder
             }
 
             $filtered = $val;
-//            $filtered = collect((array) $val)
-//                ->reject(fn ($val, $key) => $key !== 'prev' && is_null($val))
-//                ->toArray();
+            //            $filtered = collect((array) $val)
+            //                ->reject(fn ($val, $key) => $key !== 'prev' && is_null($val))
+            //                ->toArray();
 
-            uksort($filtered, new MapKeySort());
+            uksort($filtered, new MapKeySort);
 
             $len = count($filtered);
             $this->writeTypeAndArgument(5, $len);
@@ -234,7 +234,7 @@ final class Encoder
             return;
         }
 
-        throw new InvalidArgumentException();
+        throw new InvalidArgumentException;
     }
 
     private function writeRaw(string $data): void

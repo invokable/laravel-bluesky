@@ -61,7 +61,7 @@ trait WithOAuthSession
     public function getOAuthSession(): OAuthSession
     {
         if (is_null($this->session)) {
-            $this->session = new OAuthSession();
+            $this->session = new OAuthSession;
         }
 
         return $this->session;

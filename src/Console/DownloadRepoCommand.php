@@ -41,8 +41,6 @@ class DownloadRepoCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
     public function handle(): int
     {
@@ -90,7 +88,7 @@ class DownloadRepoCommand extends Command
         $this->line('Download: '.Storage::path($file));
 
         $signed = CAR::signedCommit(Utils::streamFor(Storage::readStream($file)));
-        //dump($signed);
+        // dump($signed);
 
         $pk = DidKey::parse($didDoc->publicKey());
 

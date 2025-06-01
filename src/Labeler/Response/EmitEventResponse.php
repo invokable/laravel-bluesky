@@ -22,8 +22,7 @@ final readonly class EmitEventResponse implements Arrayable, Jsonable
         protected ?string $createdAt = null,
         protected ?string $creatorHandle = null,
         protected ?string $subjectHandle = null,
-    ) {
-    }
+    ) {}
 
     /**
      * @return array{id: int, event: array, subject: array, subjectBlobCids: array, createdBy: string, createdAt: string, creatorHandle?: string, subjectHandle?: string}

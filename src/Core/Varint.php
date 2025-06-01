@@ -37,7 +37,7 @@ final class Varint
     public static function decode(string $bytes): int
     {
         if (strlen($bytes) > self::MAX_LEN) {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException;
         }
 
         $x = 0;
@@ -47,12 +47,12 @@ final class Varint
             $b = ord($b);
 
             if ($i === self::MAX_LEN - 1 && $b >= 0x80) {
-                throw new InvalidArgumentException();
+                throw new InvalidArgumentException;
             }
 
             if ($b < 0x80) {
                 if ($b === 0 && $s > 0) {
-                    throw new InvalidArgumentException();
+                    throw new InvalidArgumentException;
                 }
 
                 return $x | ($b << $s);
@@ -62,7 +62,7 @@ final class Varint
             $s += 7;
         }
 
-        throw new InvalidArgumentException(); // @codeCoverageIgnore
+        throw new InvalidArgumentException; // @codeCoverageIgnore
     }
 
     /**

@@ -15,8 +15,7 @@ final readonly class LabelLocale implements Arrayable
         private string $lang,
         private string $name,
         private string $description,
-    ) {
-    }
+    ) {}
 
     public static function make(
         string $lang,

@@ -18,8 +18,7 @@ readonly class UnsignedLabel implements Arrayable
         public string $cts,
         public ?string $exp,
         public bool $neg = false,
-    ) {
-    }
+    ) {}
 
     public static function fromArray(array $array): self
     {

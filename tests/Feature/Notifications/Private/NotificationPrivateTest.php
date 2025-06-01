@@ -164,7 +164,7 @@ class NotificationPrivateTest extends TestCase
     {
         Http::fake(fn () => $this->session);
 
-        $user = new TestUser();
+        $user = new TestUser;
 
         $user->notify(new TestNotification(text: 'test'));
 
@@ -190,7 +190,7 @@ class NotificationPrivateTest extends TestCase
         Bluesky::shouldReceive('withToken->refreshSession->client->chat->getConvoForMembers->json')->once();
         Bluesky::shouldReceive('client->chat->sendMessage')->once();
 
-        $user = new TestUserOAuth();
+        $user = new TestUserOAuth;
 
         $user->notify(new TestNotification(text: 'test'));
 
@@ -211,8 +211,7 @@ class TestNotification extends \Illuminate\Notifications\Notification
 {
     public function __construct(
         protected string $text,
-    ) {
-    }
+    ) {}
 
     public function via(object $notifiable): array
     {

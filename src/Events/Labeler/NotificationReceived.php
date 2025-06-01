@@ -9,6 +9,5 @@ class NotificationReceived
     public function __construct(
         public string $reason,
         public array $notification,
-    ) {
-    }
+    ) {}
 }

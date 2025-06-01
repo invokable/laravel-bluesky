@@ -15,9 +15,9 @@ use Revolution\Bluesky\Types\SelfLabels;
 
 final class Post extends AbstractPost implements Arrayable, Recordable
 {
+    use Conditionable;
     use HasRecord;
     use Macroable;
-    use Conditionable;
 
     public function __construct(string $text = '', ?array $facets = null)
     {

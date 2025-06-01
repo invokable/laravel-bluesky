@@ -18,16 +18,14 @@ abstract class AbstractKeypair
 
     protected PrivateKey $key;
 
-    final public function __construct()
-    {
-    }
+    final public function __construct() {}
 
     /**
      * @param  string  $key  url-safe base64 encoded private key
      */
     public static function load(string $key): static
     {
-        $self = new static();
+        $self = new static;
 
         /** @var PrivateKey $sk */
         $sk = EC::loadPrivateKey(JWT::urlsafeB64Decode($key));
@@ -39,7 +37,7 @@ abstract class AbstractKeypair
 
     public static function create(): static
     {
-        $self = new static();
+        $self = new static;
 
         $self->key = EC::createKey(static::CURVE);
 

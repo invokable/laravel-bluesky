@@ -24,7 +24,7 @@ readonly class SavedLabel extends SignedLabel
     public static function fromArray(array $array): self
     {
         if (! Arr::hasAny($array, ['id', 'uri', 'val', 'src', 'cts', 'sig'])) {
-            throw new InvalidArgumentException();
+            throw new InvalidArgumentException;
         }
 
         $unsigned = UnsignedLabel::fromArray($array);

@@ -19,9 +19,13 @@ final readonly class AtUri implements Stringable
     protected const ATP_URI_REGEX = '/^(at:\/\/)?((?:did:[a-z0-9:%-]+)|(?:[a-z0-9][a-z0-9.:-]*))(\/[^?#\s]*)?(\?[^#\s]+)?(#[^\s]+)?$/i';
 
     protected ?string $protocol;
+
     protected ?string $host;
+
     protected string $pathname;
+
     protected string $searchParams;
+
     protected string $hash;
 
     public function __construct(protected string $uri)

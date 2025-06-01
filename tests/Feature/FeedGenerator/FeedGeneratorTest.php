@@ -17,7 +17,7 @@ use Tests\TestCase;
 
 class FeedGeneratorTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         parent::setUp();
 
@@ -36,7 +36,7 @@ class FeedGeneratorTest extends TestCase
 
     public function test_feed_register_callable_class(): void
     {
-        FeedGenerator::register('test', new TestFeed());
+        FeedGenerator::register('test', new TestFeed);
 
         $this->assertTrue(FeedGenerator::has('test'));
     }
@@ -59,14 +59,14 @@ class FeedGeneratorTest extends TestCase
 
     public function test_feed_register_class_callable_array(): void
     {
-        FeedGenerator::register('test', [new TestFeed2(), 'feed']);
+        FeedGenerator::register('test', [new TestFeed2, 'feed']);
 
         $this->assertTrue(FeedGenerator::has('test'));
     }
 
     public function test_feed_register_first_class_callable_syntax(): void
     {
-        FeedGenerator::register('test', (new TestFeed2())->feed(...));
+        FeedGenerator::register('test', (new TestFeed2)->feed(...));
 
         $this->assertTrue(FeedGenerator::has('test'));
     }

@@ -66,7 +66,7 @@ class ClientTest extends TestCase
 
         Http::fake(fn () => $this->session);
 
-        $client = new BlueskyManager();
+        $client = new BlueskyManager;
 
         $client->login(identifier: 'identifier', password: 'password');
 
@@ -82,7 +82,7 @@ class ClientTest extends TestCase
     {
         Http::fake(fn () => $this->session);
 
-        $client = new BlueskyManager();
+        $client = new BlueskyManager;
 
         $client->login(identifier: 'identifier', password: 'password');
 
@@ -100,7 +100,7 @@ class ClientTest extends TestCase
     {
         Http::fake(fn () => $this->session);
 
-        $client = new BlueskyManager();
+        $client = new BlueskyManager;
 
         $client->login(identifier: 'identifier', password: 'password');
 
@@ -111,7 +111,7 @@ class ClientTest extends TestCase
     {
         Http::fake(fn () => $this->session);
 
-        $client = new BlueskyManager();
+        $client = new BlueskyManager;
 
         $client->login(identifier: 'identifier', password: 'password');
 
@@ -229,8 +229,8 @@ class ClientTest extends TestCase
         Http::fakeSequence()
             ->push(['id' => 'did:plc:test']);
 
-        $response = (new Identity())->resolveDID(did: 'did:plc:test', cache: true);
-        $response_cache = (new Identity())->resolveDID(did: 'did:plc:test', cache: true);
+        $response = (new Identity)->resolveDID(did: 'did:plc:test', cache: true);
+        $response_cache = (new Identity)->resolveDID(did: 'did:plc:test', cache: true);
 
         $this->assertTrue($response->collect()->has('id'));
         $this->assertSame('did:plc:test', $response->json('id'));
@@ -718,13 +718,13 @@ class ClientTest extends TestCase
             ->push($this->session)
             ->push(['posts' => [
                 ['uri' => 'at://did:plc:test/app.bsky.feed.post/123', 'value' => ['text' => 'First post']],
-                ['uri' => 'at://did:plc:test/app.bsky.feed.post/456', 'value' => ['text' => 'Second post']]
+                ['uri' => 'at://did:plc:test/app.bsky.feed.post/456', 'value' => ['text' => 'Second post']],
             ]]);
 
         $response = Bluesky::login(identifier: 'identifier', password: 'password')
             ->getPosts(uris: [
                 'at://did:plc:test/app.bsky.feed.post/123',
-                'at://did:plc:test/app.bsky.feed.post/456'
+                'at://did:plc:test/app.bsky.feed.post/456',
             ]);
 
         $this->assertTrue($response->successful());
@@ -737,7 +737,7 @@ class ClientTest extends TestCase
             return str_contains($request->url(), 'xrpc/app.bsky.feed.getPosts') &&
                    $request['uris'] === [
                        'at://did:plc:test/app.bsky.feed.post/123',
-                       'at://did:plc:test/app.bsky.feed.post/456'
+                       'at://did:plc:test/app.bsky.feed.post/456',
                    ];
         });
     }
@@ -772,9 +772,9 @@ class ClientTest extends TestCase
                     [
                         'uri' => 'at://did:plc:test/app.bsky.feed.like/123',
                         'reason' => 'like',
-                        'isRead' => false
-                    ]
-                ]
+                        'isRead' => false,
+                    ],
+                ],
             ]);
 
         $response = Bluesky::login(identifier: 'identifier', password: 'password')
@@ -833,9 +833,9 @@ class ClientTest extends TestCase
                     [
                         'uri' => 'at://did:plc:test/app.bsky.feed.like/123',
                         'subject' => ['uri' => 'at://did:plc:test/app.bsky.feed.post/456'],
-                        'createdAt' => '2023-01-01T00:00:00Z'
-                    ]
-                ]
+                        'createdAt' => '2023-01-01T00:00:00Z',
+                    ],
+                ],
             ]);
 
         $response = Bluesky::login(identifier: 'identifier', password: 'password')
@@ -888,9 +888,9 @@ class ClientTest extends TestCase
                     [
                         'did' => 'did:plc:follower1',
                         'handle' => 'follower1.bsky.social',
-                        'displayName' => 'Follower One'
-                    ]
-                ]
+                        'displayName' => 'Follower One',
+                    ],
+                ],
             ]);
 
         $response = Bluesky::login(identifier: 'identifier', password: 'password')
@@ -922,9 +922,9 @@ class ClientTest extends TestCase
                     [
                         'did' => 'did:plc:follow1',
                         'handle' => 'follow1.bsky.social',
-                        'displayName' => 'Follow One'
-                    ]
-                ]
+                        'displayName' => 'Follow One',
+                    ],
+                ],
             ]);
 
         $response = Bluesky::login(identifier: 'identifier', password: 'password')

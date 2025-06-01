@@ -19,22 +19,14 @@ use Revolution\Bluesky\Client\Concerns\ComAtprotoServer;
 use Revolution\Bluesky\Client\HasHttp;
 use Revolution\Bluesky\Contracts\XrpcClient;
 
-class AtProtoClient implements
-    XrpcClient,
-    Identity,
-    Label,
-    Moderation,
-    Repo,
-    Server
+class AtProtoClient implements Identity, Label, Moderation, Repo, Server, XrpcClient
 {
-    use Macroable;
-    use Conditionable;
-
-    use HasHttp;
-
     use ComAtprotoIdentity;
     use ComAtprotoLabel;
     use ComAtprotoModeration;
     use ComAtprotoRepo;
     use ComAtprotoServer;
+    use Conditionable;
+    use HasHttp;
+    use Macroable;
 }

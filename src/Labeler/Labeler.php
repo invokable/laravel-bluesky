@@ -137,7 +137,7 @@ final class Labeler
             ->except(['id', 'created_at', 'updated_at'])
             ->reject(fn ($value) => is_null($value))
             ->reject(fn ($value, $key) => $key === 'neg' && $value === false)
-            ->sortKeysUsing(new MapKeySort())
+            ->sortKeysUsing(new MapKeySort)
             ->toArray();
     }
 

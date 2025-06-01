@@ -26,8 +26,7 @@ final class HttpServer
 {
     public function __construct(
         protected Worker $ws,
-    ) {
-    }
+    ) {}
 
     public function onMessage(TcpConnection $connection, Request $request): void
     {

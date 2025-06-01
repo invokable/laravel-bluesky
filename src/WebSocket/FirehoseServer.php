@@ -56,7 +56,7 @@ final class FirehoseServer
     {
         $this->host = Config::string('bluesky.firehose.host');
 
-        $worker = new Worker();
+        $worker = new Worker;
 
         $worker->onWorkerStart = function ($worker) {
             $uri = 'ws://'.$this->host.':443/xrpc/com.atproto.sync.subscribeRepos';

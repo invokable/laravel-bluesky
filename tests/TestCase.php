@@ -18,7 +18,6 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
      * Load package service provider.
      *
      * @param  Application  $app
-     * @return array
      */
     protected function getPackageProviders($app): array
     {
@@ -32,7 +31,6 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
      * Load package alias.
      *
      * @param  Application  $app
-     * @return array
      */
     protected function getPackageAliases($app): array
     {
@@ -45,12 +43,11 @@ abstract class TestCase extends \Orchestra\Testbench\TestCase
      * Define environment setup.
      *
      * @param  Application  $app
-     * @return void
      */
     protected function defineEnvironment($app): void
     {
         tap($app['config'], function (Repository $config) {
-            //for testing
+            // for testing
             $config->set('bluesky.oauth.private_key', 'LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tDQpNSUdIQWdFQU1CTUdCeXFHU000OUFnRUdDQ3FHU000OUF3RUhCRzB3YXdJQkFRUWdEZkhxckZzSkRUUkVMa1ZIDQpHNG9DNTh2U2k0SnFkN3NPSTVNdTZzeVdrY21oUkFOQ0FBVHc2VU1DMlpYcFV4blhFc1BjRTA5aFdoYWdLbWxODQpRUXovSUlFYUVHdEFtSU5YeGUzTHZ0NE5KUS9YVWdGV3hkdEJBbUhQcFN4MlM3RnIvdmFhT2UzZw0KLS0tLS1FTkQgUFJJVkFURSBLRVktLS0tLQ',
             );
             $config->set('bluesky.labeler.private_key', 'LS0tLS1CRUdJTiBQUklWQVRFIEtFWS0tLS0tDQpNSUdFQWdFQU1CQUdCeXFHU000OUFnRUdCU3VCQkFBS0JHMHdhd0lCQVFRZ0ZlcFByV2RtSkdTUGpGbStiVmxuDQp

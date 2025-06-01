@@ -19,8 +19,8 @@ use Revolution\Bluesky\RichText\TextBuilder;
 #[NSID('chat.bsky.convo.defs#messageInput')]
 final class BlueskyPrivateMessage implements Arrayable
 {
-    use Macroable;
     use Conditionable;
+    use Macroable;
 
     protected string $text;
 

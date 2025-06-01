@@ -17,8 +17,7 @@ final readonly class BlueskyRoute
         public ?string $identifier = null,
         #[\SensitiveParameter] public ?string $password = null,
         #[Format('at-identifier')] public ?string $receiver = null,
-    ) {
-    }
+    ) {}
 
     /**
      * @param  string|null  $receiver  Receiver DID or handle when using PrivateChannel

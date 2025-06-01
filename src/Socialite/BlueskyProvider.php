@@ -21,11 +21,11 @@ use Revolution\Bluesky\Socialite\Concerns\WithTokenRequest;
 class BlueskyProvider extends AbstractProvider implements ProviderInterface
 {
     use WithAuthServer;
+    use WithClientAssertion;
+    use WithOAuthSession;
     use WithPAR;
     use WithPDS;
-    use WithClientAssertion;
     use WithTokenRequest;
-    use WithOAuthSession;
 
     protected ?string $service = null;
 
@@ -57,7 +57,7 @@ class BlueskyProvider extends AbstractProvider implements ProviderInterface
     protected $usesPKCE = true;
 
     /**
-     * @inheritdoc
+     * {@inheritdoc}
      */
     protected function getAuthUrl($state): string
     {
@@ -116,7 +116,7 @@ class BlueskyProvider extends AbstractProvider implements ProviderInterface
      */
     protected function mapUserToObject(array $user): User
     {
-        return (new User())->setRaw($user)->map([
+        return (new User)->setRaw($user)->map([
             'id' => data_get($user, 'did'),
             'nickname' => data_get($user, 'handle'),
             'name' => data_get($user, 'displayName'),

@@ -59,7 +59,7 @@ trait WithTokenRequest
                 $res,
             );
 
-            throw new AuthenticationException();
+            throw new AuthenticationException;
         }
 
         $dpop_nonce = $res->header('DPoP-Nonce');
@@ -80,7 +80,6 @@ trait WithTokenRequest
      * Get the access token response for the given code.
      *
      * @param  string  $code
-     * @return array
      *
      * @throws RequestException
      * @throws ConnectionException
@@ -103,7 +102,6 @@ trait WithTokenRequest
      * Get the POST fields for the token request.
      *
      * @param  string  $code
-     * @return array
      */
     protected function getTokenFields($code): array
     {
@@ -124,7 +122,6 @@ trait WithTokenRequest
      * Get the refresh token response for the given refresh token.
      *
      * @param  string  $refreshToken
-     * @return array
      *
      * @throws RequestException
      * @throws ConnectionException

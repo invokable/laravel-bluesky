@@ -16,7 +16,7 @@ class ValidationTest extends TestCase
     {
         $validator = Validator::make(
             data: ['did' => 'did:plc:test'],
-            rules: ['did' => new AtDID()],
+            rules: ['did' => new AtDID],
         );
 
         $this->assertTrue($validator->passes());
@@ -26,7 +26,7 @@ class ValidationTest extends TestCase
     {
         $validator = Validator::make(
             data: ['did' => ''],
-            rules: ['did' => new AtDID()],
+            rules: ['did' => new AtDID],
         );
 
         $this->assertTrue($validator->fails());
@@ -36,7 +36,7 @@ class ValidationTest extends TestCase
     {
         $validator = Validator::make(
             data: ['handle' => 'alice.local'],
-            rules: ['handle' => new AtHandle()],
+            rules: ['handle' => new AtHandle],
         );
 
         $this->assertTrue($validator->passes());
@@ -46,7 +46,7 @@ class ValidationTest extends TestCase
     {
         $validator = Validator::make(
             data: ['handle' => ''],
-            rules: ['handle' => new AtHandle()],
+            rules: ['handle' => new AtHandle],
         );
 
         $this->assertTrue($validator->fails());
@@ -60,8 +60,8 @@ class ValidationTest extends TestCase
                 'handle' => 'alice.local',
             ],
             rules: [
-                'did' => [new AtActor()],
-                'handle' => [new AtActor()],
+                'did' => [new AtActor],
+                'handle' => [new AtActor],
             ],
         );
 
@@ -76,8 +76,8 @@ class ValidationTest extends TestCase
                 'handle' => null,
             ],
             rules: [
-                'did' => [new AtActor()],
-                'handle' => [new AtActor()],
+                'did' => [new AtActor],
+                'handle' => [new AtActor],
             ],
         );
 

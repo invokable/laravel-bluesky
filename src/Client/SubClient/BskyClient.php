@@ -17,22 +17,15 @@ use Revolution\Bluesky\Client\Concerns\AppBskyLabeler;
 use Revolution\Bluesky\Client\HasHttp;
 use Revolution\Bluesky\Contracts\XrpcClient;
 
-class BskyClient implements
-    XrpcClient,
-    Actor,
-    Feed,
-    Graph,
-    Labeler
+class BskyClient implements Actor, Feed, Graph, Labeler, XrpcClient
 {
-    use Macroable;
-    use Conditionable;
-
-    use HasHttp;
-
     use AppBskyActor;
     use AppBskyFeed;
     use AppBskyGraph;
     use AppBskyLabeler;
+    use Conditionable;
+    use HasHttp;
+    use Macroable;
 
     public const APPVIEW_SERVICE_DID = 'did:web:api.bsky.app#bsky_appview';
 }

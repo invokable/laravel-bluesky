@@ -15,7 +15,7 @@ final class JsonWebKeySet implements Arrayable, Jsonable, Stringable
 
     public static function load(): self
     {
-        $self = new self();
+        $self = new self;
 
         $key = OAuthKey::load()->toJWK()->asPublic();
 

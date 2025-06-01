@@ -17,16 +17,16 @@ use Revolution\Bluesky\Types\StrongRef;
 
 final class Profile extends AbstractProfile implements Arrayable, Recordable
 {
+    use Conditionable;
     use HasRecord;
     use Macroable;
-    use Conditionable;
     use Tappable;
 
     public static function fromArray(Collection|array $profile): self
     {
         $profile = Collection::make($profile);
 
-        $self = new self();
+        $self = new self;
 
         $profile->each(function ($value, $name) use ($self) {
             if (property_exists($self, $name)) {
@@ -65,8 +65,6 @@ final class Profile extends AbstractProfile implements Arrayable, Recordable
      *     return Bluesky::uploadBlob(Storage::get('test.png'), Storage::mimeType('test.png'))->json('blob');
      * })
      * ```
-     *
-     * @param  BlobRef|array|callable|null  $avatar
      */
     public function avatar(null|BlobRef|array|callable $avatar = null): self
     {
@@ -100,8 +98,6 @@ final class Profile extends AbstractProfile implements Arrayable, Recordable
      *     return Bluesky::uploadBlob(Storage::get('test.png'), Storage::mimeType('test.png'))->json('blob');
      * })
      * ```
-     *
-     * @param  BlobRef|array|callable|null  $banner
      */
     public function banner(null|BlobRef|array|callable $banner = null): self
     {

@@ -31,9 +31,9 @@ use function Illuminate\Support\enum_value;
 
 class BlueskyManager implements Factory
 {
+    use Conditionable;
     use HasShortHand;
     use Macroable;
-    use Conditionable;
 
     protected ?Agent $agent = null;
 
@@ -124,7 +124,7 @@ class BlueskyManager implements Factory
     {
         $did = $this->agent()?->did();
 
-        return empty($did) ? throw new AuthenticationException() : $did;
+        return empty($did) ? throw new AuthenticationException : $did;
     }
 
     public function agent(): ?Agent

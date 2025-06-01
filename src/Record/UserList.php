@@ -20,14 +20,14 @@ final class UserList extends AbstractList implements Arrayable, Recordable
 
     public static function create(): self
     {
-        return new self();
+        return new self;
     }
 
     public static function fromArray(Collection|array $list): self
     {
         $list = Collection::make($list);
 
-        $self = new self();
+        $self = new self;
 
         $list->each(function ($value, $name) use ($self) {
             if (property_exists($self, $name)) {
@@ -83,8 +83,6 @@ final class UserList extends AbstractList implements Arrayable, Recordable
      *     return Bluesky::uploadBlob(Storage::get('test.png'), Storage::mimeType('test.png'))->json('blob');
      * })
      * ```
-     *
-     * @param  BlobRef|array|callable|null  $avatar
      */
     public function avatar(null|BlobRef|array|callable $avatar = null): self
     {

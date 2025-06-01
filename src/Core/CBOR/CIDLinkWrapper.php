@@ -14,9 +14,7 @@ use Revolution\Bluesky\Core\CID;
  */
 final readonly class CIDLinkWrapper implements Arrayable
 {
-    public function __construct(protected string $bytes)
-    {
-    }
+    public function __construct(protected string $bytes) {}
 
     public function cid(): string
     {

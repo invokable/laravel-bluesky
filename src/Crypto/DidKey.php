@@ -39,8 +39,7 @@ final class DidKey implements Arrayable, ArrayAccess
         public string $curve,
         public string $alg,
         public string $key,
-    ) {
-    }
+    ) {}
 
     /**
      * Did key to Public key.

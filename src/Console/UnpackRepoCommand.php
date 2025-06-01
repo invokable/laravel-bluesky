@@ -42,8 +42,6 @@ class UnpackRepoCommand extends Command
 
     /**
      * Execute the console command.
-     *
-     * @return int
      */
     public function handle(): int
     {
@@ -100,7 +98,7 @@ class UnpackRepoCommand extends Command
     private function blockIterator(string $name, string $file): void
     {
         foreach (CAR::blockIterator(Utils::streamFor(Storage::readStream($file))) as $cid => $block) {
-            //dump($cid, $block);
+            // dump($cid, $block);
 
             if (Arr::exists($block, '$type')) {
                 $collection = data_get($block, '$type');
@@ -110,6 +108,7 @@ class UnpackRepoCommand extends Command
                 $collection = '_commit';
             } else {
                 dump($block);
+
                 continue;
             }
 

@@ -12,8 +12,7 @@ final readonly class SubscribeLabelResponse
     public function __construct(
         protected int $seq,
         protected array $labels,
-    ) {
-    }
+    ) {}
 
     public function toBytes(): string
     {

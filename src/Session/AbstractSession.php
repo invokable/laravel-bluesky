@@ -15,9 +15,9 @@ use Revolution\Bluesky\Support\DidDocument;
 
 abstract class AbstractSession implements Arrayable
 {
-    use Tappable;
-    use Macroable;
     use Conditionable;
+    use Macroable;
+    use Tappable;
 
     protected Collection $session;
 

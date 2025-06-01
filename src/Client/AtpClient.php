@@ -20,13 +20,12 @@ use Revolution\Bluesky\Facades\Bluesky;
 
 class AtpClient implements XrpcClient
 {
+    use Conditionable;
+    use ForwardsCalls;
+    use HasHttp;
     use Macroable {
         Macroable::__call as macroCall;
     }
-    use ForwardsCalls;
-    use Conditionable;
-
-    use HasHttp;
 
     /**
      * VideoClient.

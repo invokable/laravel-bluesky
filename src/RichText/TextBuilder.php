@@ -17,8 +17,8 @@ use Revolution\Bluesky\Record\Post;
 
 final class TextBuilder implements Arrayable
 {
-    use Macroable;
     use Conditionable;
+    use Macroable;
     use Tappable;
 
     public string $text = '';
