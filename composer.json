@@ -28,7 +28,8 @@
         "larastan/larastan": "^3.0",
         "phpstan/extension-installer": "^1.4",
         "workerman/workerman": "^5.0",
-        "revolt/event-loop": "^1.0"
+        "revolt/event-loop": "^1.0",
+        "laravel/pint": "^1.22"
     },
     "autoload": {
         "psr-4": {
