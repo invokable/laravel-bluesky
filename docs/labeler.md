@@ -71,7 +71,7 @@ readonly class ArtisanLabeler extends AbstractLabeler
 
 Please refer to the sample for details.
 
-[Sample](https://github.com/kawax/laralabeler/blob/main/app/Labeler/ArtisanLabeler.php)
+[Sample](https://github.com/invokable/laralabeler/blob/main/app/Labeler/ArtisanLabeler.php)
 
 The processing required for Labeler is done within the package, so only the parts that require customization are implemented within your own Labeler class.
 
@@ -196,9 +196,9 @@ How you actually label is up to your labeler.
 
 In the sample, we're using Laravel's event functionality to label "when followed"
 
-https://github.com/kawax/laralabeler/blob/main/app/Listeners/FollowListener.php
+https://github.com/invokable/laralabeler/blob/main/app/Listeners/FollowListener.php
 
 The follower is also labeled in the task schedule in case an event is missed.
 
-https://github.com/kawax/laralabeler/blob/main/app/Console/Commands/LabelFollowerCommand.php
+https://github.com/invokable/laralabeler/blob/main/app/Console/Commands/LabelFollowerCommand.php
 
