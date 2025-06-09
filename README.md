@@ -155,7 +155,7 @@ To authenticate with OAuth, read the Socialite documentation.
 - [Statusphere Laravel edition](https://github.com/invokable/statusphere)
 
 ## Contracts
-https://github.com/kawax/atproto-lexicon-contracts
+https://github.com/invokable/atproto-lexicon-contracts
 
 ## LICENCE
 MIT
