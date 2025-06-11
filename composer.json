@@ -25,8 +25,6 @@
     },
     "require-dev": {
         "orchestra/testbench": "^9.0||^10.0",
-        "larastan/larastan": "^3.0",
-        "phpstan/extension-installer": "^1.4",
         "workerman/workerman": "^5.0",
         "revolt/event-loop": "^1.0",
         "laravel/pint": "^1.22"
@@ -64,11 +62,6 @@
         }
     },
     "minimum-stability": "stable",
-    "config": {
-        "allow-plugins": {
-            "phpstan/extension-installer": true
-        }
-    },
     "scripts": {
         "post-autoload-dump": [
             "@clear",
