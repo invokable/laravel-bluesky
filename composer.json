@@ -86,7 +86,7 @@
             "@php vendor/bin/testbench serve --ansi"
         ],
         "lint": [
-            "@php vendor/bin/phpstan analyse --verbose --ansi"
+            "vendor/bin/pint"
         ],
         "test": [
             "@php vendor/bin/phpunit"
