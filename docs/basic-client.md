@@ -3,12 +3,12 @@ Basic Client
 
 ## Authentication
 
-Bluesky has two authentication methods: "App password" and "OAuth". "OAuth" is recommended from now on,
+Bluesky has two authentication methods: **App password** and **OAuth**. **OAuth** is recommended from now on,
 so please also read the [Socialite](./socialite.md) docs.
 
 ### App password(Legacy)
 
-You can easily log in with the identifier and password you set in .env.
+You can log in with the identifier and password you set in .env.
 
 ```
 // .env
