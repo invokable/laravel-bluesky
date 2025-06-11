@@ -7,6 +7,10 @@ Bluesky(AT Protocol) for Laravel
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/invokable/laravel-bluesky)
 
+## Overview
+
+このパッケージは、LaravelアプリケーションからBluesky（AT Protocol）APIへ簡単にアクセスできるラッパーです。投稿の取得や検索、投稿作成、認証（Appパスワード/OAuth対応）など、Blueskyの主要な機能をLaravelから簡潔なコードで利用できます。主な用途はデータ取得や投稿、通知、フィード生成などです。
+
 ## Requirements
 - PHP >= 8.2
 - Laravel >= 11.x
