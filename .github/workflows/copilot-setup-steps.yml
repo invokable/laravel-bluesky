@@ -33,7 +33,7 @@ jobs:
         with:
           php-version: "8.4"
           extensions: mbstring, xml, ctype, iconv, intl, pdo, dom, filter, gd, json, pcre, zip
-          coverage: none
+          coverage: xdebug
 
       - name: Install Composer dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
