@@ -1,0 +1,55 @@
+name: copilot-setup-steps
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types: [opened, synchronize]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  php-8-4-setup:
+    name: PHP 8.4 Setup and Validation
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PHP 8.4
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, dom, filter, gd, json, pcre, zip
+          coverage: none
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache Composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Check PHP syntax
+        run: find . -name "*.php" -not -path "./vendor/*" -exec php -l {} \;
+
+      - name: Run tests
+        run: vendor/bin/phpunit --no-coverage
+
+      - name: Run code style check
+        run: vendor/bin/pint --test
+
+      - name: Run static analysis
+        run: vendor/bin/phpstan analyse --no-progress
