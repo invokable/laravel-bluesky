@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1749644288">
-  <project timestamp="1749644288" name="Clover Coverage">
+<coverage generated="1749644366">
+  <project timestamp="1749644366" name="Clover Coverage">
     <package name="Revolution\Bluesky\Agent">
       <file name="/home/runner/work/laravel-bluesky/laravel-bluesky/src/Agent/LegacyAgent.php">
         <class name="Revolution\Bluesky\Agent\LegacyAgent" namespace="Revolution\Bluesky\Agent">
