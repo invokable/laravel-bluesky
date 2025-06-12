@@ -13,5 +13,4 @@ phpunit.xml export-ignore
 /src/Console/stubs export-ignore
 /workbench export-ignore
 testbench.yaml export-ignore
-phpstan.neon export-ignore
 pint.json export-ignore
