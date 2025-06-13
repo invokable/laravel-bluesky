@@ -166,3 +166,199 @@ The package provides extensive CLI tools:
 
 **XRPC** - AT Protocol's remote procedure call system. Base communication protocol.
 *Usage: All API endpoints use `/xrpc/` prefix*
+
+## Copilot Coding Guidelines
+
+This section provides explicit coding conventions and quality standards for contributing to the Laravel Bluesky package. Follow these guidelines to ensure code consistency and maintainability.
+
+### Code Structure Conventions
+
+#### File Organization
+- Use strict typing: `declare(strict_types=1);` at the top of all PHP files
+- Follow PSR-4 autoloading with proper namespace declarations
+- Organize classes by functionality in logical directory structures:
+  - `Client/` - HTTP client system and API communication
+  - `Agent/` - Authentication management
+  - `Session/` - Session data handling  
+  - `Notifications/` - Laravel notification channels
+  - `Record/` - AT Protocol record types
+  - `Support/` - Utility classes and helpers
+  - `Contracts/` - Interfaces and contracts
+
+#### Class Design
+- Implement single responsibility principle - one class, one purpose
+- Use interfaces (`Contracts/`) for dependency injection and testing
+- Leverage traits for shared functionality (e.g., `HasHttp`, `HasShortHand`)
+- Prefer composition over inheritance
+- Use final classes where inheritance is not intended
+
+#### Method Design
+- Use named parameters for methods with multiple optional parameters
+- Return Response objects from HTTP client methods
+- Provide fluent interfaces where appropriate (e.g., `TextBuilder`)
+- Include comprehensive PHPDoc with usage examples
+
+```php
+/**
+ * Create a new post with rich text.
+ *
+ * ```
+ * use Revolution\Bluesky\Record\Post;
+ *
+ * $post = Post::create(text: 'Hello world!')
+ *             ->addImage(blob: $blob, alt: 'Description');
+ * ```
+ */
+public function create(string $text, ?array $facets = null): self
+```
+
+### Laravel Integration Standards
+
+#### Service Provider Registration
+- Register all services, routes, and commands in `BlueskyServiceProvider`
+- Use conditional registration based on configuration flags
+- Register facades through the `extra.laravel.providers` composer configuration
+
+#### Facade Implementation
+- Provide static interface through `Bluesky` facade to `BlueskyManager`
+- Implement factory pattern for multiple authentication contexts
+- Support method chaining for fluent API usage
+
+#### Notification Channels
+- Extend Laravel's notification system with dedicated channels
+- Support both OAuth and app password authentication via `BlueskyRoute`
+- Provide clear routing methods for different authentication types
+
+```php
+// App password
+BlueskyRoute::to(identifier: config('bluesky.identifier'), password: config('bluesky.password'))
+
+// OAuth
+BlueskyRoute::to(oauth: $session)
+```
+
+#### Console Commands
+- Prefix all commands with `bluesky:`
+- Provide detailed descriptions and usage examples
+- Support common Laravel command patterns (signatures, validation)
+- Use appropriate exit codes and output formatting
+
+#### Testing Integration
+- Support Laravel's HTTP client mocking via `Http::fake()`
+- Provide facade mocking capabilities for unit tests
+- Use `Http::preventStrayRequests()` to catch unintended external calls
+
+### Configuration Management
+
+#### Environment Variables
+- Use descriptive `BLUESKY_` prefixed environment variable names
+- Provide sensible defaults in config files
+- Document all configuration options with inline comments
+
+#### Config Structure
+- Organize related settings in nested arrays
+- Use boolean flags for feature toggles (e.g., `disabled` options)
+- Support both development and production configurations
+
+```php
+'oauth' => [
+    'disabled' => env('BLUESKY_OAUTH_DISABLED', false),
+    'metadata' => [
+        'scope' => env('BLUESKY_OAUTH_SCOPE', 'atproto transition:generic'),
+        // Additional OAuth settings...
+    ],
+],
+```
+
+#### Route Registration
+- Use conditional route registration based on config flags
+- Group related routes with appropriate prefixes
+- Follow RESTful conventions where applicable
+
+### Terminology and Naming Standards
+
+#### AT Protocol Conventions
+- Use proper AT Protocol terminology (DID, PDS, XRPC, CAR, CID)
+- Follow camelCase for method names, PascalCase for class names
+- Use descriptive names that reflect AT Protocol concepts
+
+#### Authentication Naming
+- Use "OAuth" for OAuth 2.0 + DPoP authentication
+- Use "Legacy" for app password authentication
+- Use "Agent" for authentication managers, "Session" for session data
+
+#### HTTP Client Naming
+- Main client: `AtpClient` 
+- Specialized clients: `BskyClient`, `VideoClient`, etc.
+- Use "Client" suffix for HTTP client classes
+- Use descriptive method names matching AT Protocol endpoints
+
+#### Record and Data Types
+- Use singular nouns for record types: `Post`, `Profile`, `Like`
+- Use "Ref" suffix for reference types: `StrongRef`, `RepoRef`
+- Use "Builder" suffix for fluent construction classes
+
+### Error Handling Standards
+
+#### Exception Types
+- Use Laravel's built-in exceptions where appropriate
+- Create custom exceptions for AT Protocol specific errors
+- Provide meaningful error messages with context
+
+#### HTTP Error Handling
+- Return Response objects to allow caller to handle errors
+- Use appropriate HTTP status codes
+- Log errors appropriately without exposing sensitive data
+
+### Documentation Standards
+
+#### PHPDoc Requirements
+- Include comprehensive method documentation
+- Provide usage examples in code blocks
+- Document all parameters with types and descriptions
+- Include `@return` and `@throws` annotations
+
+#### Code Examples
+- Use realistic, working examples in documentation
+- Show both basic and advanced usage patterns
+- Include error handling examples where relevant
+- Use consistent variable naming in examples
+
+### PR Checklist and Quality Standards
+
+#### Before Submitting
+- [ ] All tests pass (`composer test`)
+- [ ] Code passes linting (`composer lint`)
+- [ ] New functionality includes appropriate tests
+- [ ] Documentation includes usage examples
+- [ ] Breaking changes are clearly marked and documented
+- [ ] Configuration changes include environment variable documentation
+
+#### Code Quality
+- [ ] Follows PSR-12 coding standards (enforced by Laravel Pint)
+- [ ] Uses strict typing throughout
+- [ ] Includes comprehensive error handling
+- [ ] Avoids code duplication through proper abstraction
+- [ ] Uses dependency injection where appropriate
+
+#### Testing Requirements
+- [ ] Unit tests for business logic
+- [ ] Integration tests for Laravel features
+- [ ] Mock external API calls appropriately
+- [ ] Test both success and failure scenarios
+- [ ] Maintain or improve code coverage
+
+#### Documentation Requirements
+- [ ] Update relevant documentation files
+- [ ] Include inline code examples
+- [ ] Update glossary for new terminology
+- [ ] Verify all links and references are working
+
+#### AT Protocol Compliance
+- [ ] Follows AT Protocol specifications correctly
+- [ ] Handles DID resolution properly
+- [ ] Implements proper XRPC request/response patterns
+- [ ] Uses correct content types and encoding
+- [ ] Validates AT Protocol data structures
+
+This ensures all contributions maintain the high quality standards and architectural consistency that make this package reliable and easy to use for Laravel developers.
