@@ -49,14 +49,16 @@ use Revolution\Bluesky\FeedGenerator\FeedGenerator;
     public function test_feed_generator(): void
     {
         FeedGenerator::register(name: 'test', algo: function (?int $limit, ?string $cursor) {
-            $posts = Bluesky::searchPosts(q: '#bluesky')->collect('posts');
+            // Use authentication due to temporary API restriction
+            $posts = Bluesky::login(identifier: config('bluesky.identifier'), password: config('bluesky.password'))
+                ->searchPosts(q: '#bluesky')->collect('posts');
             $feed = $posts->map(function (array $post) {
                 return ['post' => data_get($post, 'uri')];
             })->toArray();
             return ['feed' => $feed];
         });
 
-        Bluesky::shouldReceive('searchPosts->collect')->once()->andReturn(collect([['uri' => 'at://']]));
+        Bluesky::shouldReceive('login->searchPosts->collect')->once()->andReturn(collect([['uri' => 'at://']]));
 
         $response = $this->get(route('bluesky.feed.skeleton', ['feed' => 'at://did:/app.bsky.feed.generator/test']));
 
