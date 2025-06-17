@@ -37,6 +37,8 @@ composer remove revolution/laravel-bluesky
 
 There are many public APIs that do not require authentication if you just want to retrieve data.
 
+> **Note** Only searchPosts() is currently temporarily restricted and requires authentication, please move on to the next example.
+
 ```php
 // routes/web.php
 
