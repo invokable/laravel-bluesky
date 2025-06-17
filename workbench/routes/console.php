@@ -12,7 +12,8 @@ Artisan::command('bsky:search {q=#bluesky}', function () {
     /** @var Command $this */
     /** @var string $q */
     $q = $this->argument('q');
-    $response = Bluesky::searchPosts(q: $q, limit: 10);
+    $response = Bluesky::login(identifier: config('bluesky.identifier'), password: config('bluesky.password'))
+        ->searchPosts(q: $q, limit: 10);
 
     $response->collect('posts')
         ->each(function (array $post) {
