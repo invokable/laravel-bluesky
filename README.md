@@ -37,10 +37,10 @@ composer remove revolution/laravel-bluesky
 
 There are many public APIs that do not require authentication if you just want to retrieve data.
 
-> **Note** Only searchPosts() is currently temporarily restricted and requires authentication, please move on to the next example.
+> **Note** Due to temporary API restrictions, searchPosts() currently requires authentication. Please use the authenticated example below instead.
 
 ```php
-// routes/web.php
+// routes/web.php (CURRENTLY NOT WORKING - unauthenticated usage is temporarily restricted)
 
 use Illuminate\Support\Facades\Route;
 use Revolution\Bluesky\Facades\Bluesky;
@@ -48,6 +48,28 @@ use Revolution\Bluesky\Facades\Bluesky;
 Route::get('search', function () {
     /** @var \Illuminate\Http\Client\Response $response */
     $response = Bluesky::searchPosts(q: '#bluesky', limit: 10);
+
+    $response->collect('posts')
+        ->each(function (array $post) {
+            dump(data_get($post, 'author.displayName'));
+            dump(data_get($post, 'author.handle'));
+            dump(data_get($post, 'author.did'));
+            dump(data_get($post, 'record.text'));
+        });
+});
+```
+
+#### Authenticated usage (currently required due to temporary API restriction)
+
+```php
+// routes/web.php
+
+use Illuminate\Support\Facades\Route;
+use Revolution\Bluesky\Facades\Bluesky;
+
+Route::get('search-auth', function () {
+    $response = Bluesky::login(identifier: config('bluesky.identifier'), password: config('bluesky.password'))
+        ->searchPosts(q: '#bluesky', limit: 10);
 
     $response->collect('posts')
         ->each(function (array $post) {

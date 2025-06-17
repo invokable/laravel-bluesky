@@ -158,6 +158,8 @@ Instead of using a Closure, you can also create an independent class.
 
 Create a "callable" class in the location of your choice and register it with the AppServiceProvider.
 
+> **Note** Due to temporary API restrictions, searchPosts() currently requires authentication. The example below shows the authenticated usage pattern.
+
 ```php
 // Anywhere
 
@@ -171,7 +173,9 @@ class ArtisanFeed implements FeedGeneratorAlgorithm
 {
     public function __invoke(int $limit, ?string $cursor, ?string $user, Request $request): array
     {
-        $response = Bluesky::searchPosts(q: '#laravel', until: $cursor, limit: $limit);
+        // Use authentication due to temporary API restriction
+        $response = Bluesky::login(identifier: config('bluesky.identifier'), password: config('bluesky.password'))
+            ->searchPosts(q: '#laravel', until: $cursor, limit: $limit);
 
         $cursor = data_get($response->collect('posts')->last(), 'indexedAt');
 
