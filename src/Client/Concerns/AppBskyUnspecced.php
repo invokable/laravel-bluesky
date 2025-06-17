@@ -31,6 +31,24 @@ trait AppBskyUnspecced
         );
     }
 
+    public function getPostThreadOtherV2(string $anchor, ?bool $prioritizeFollowedUsers = null): Response
+    {
+        return $this->call(
+            api: Unspecced::getPostThreadOtherV2,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getPostThreadV2(string $anchor, ?bool $above = null, ?int $below = 6, ?int $branchingFactor = 10, ?bool $prioritizeFollowedUsers = null, ?string $sort = 'oldest'): Response
+    {
+        return $this->call(
+            api: Unspecced::getPostThreadV2,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function getSuggestedFeeds(?int $limit = 10): Response
     {
         return $this->call(

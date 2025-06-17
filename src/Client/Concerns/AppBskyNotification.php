@@ -13,6 +13,15 @@ use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Notification;
 
 trait AppBskyNotification
 {
+    public function getPreferences(): Response
+    {
+        return $this->call(
+            api: Notification::getPreferences,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function getUnreadCount(?bool $priority = null, ?string $seenAt = null): Response
     {
         return $this->call(
@@ -35,6 +44,15 @@ trait AppBskyNotification
     {
         return $this->call(
             api: Notification::putPreferences,
+            method: self::POST,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function putPreferencesV2(?array $chat = null, ?array $follow = null, ?array $like = null, ?array $likeViaRepost = null, ?array $mention = null, ?array $quote = null, ?array $reply = null, ?array $repost = null, ?array $repostViaRepost = null, ?array $starterpackJoined = null, ?array $subscribedPost = null, ?array $unverified = null, ?array $verified = null): Response
+    {
+        return $this->call(
+            api: Notification::putPreferencesV2,
             method: self::POST,
             params: compact($this->params(__METHOD__)),
         );
