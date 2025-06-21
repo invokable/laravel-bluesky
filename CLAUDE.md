@@ -67,23 +67,35 @@ php artisan bluesky:download-record alice.bsky.social -C app.bsky.feed.post
 # Unpack CAR files into individual records
 php artisan bluesky:unpack-repo alice.bsky.social
 
-# Start firehose WebSocket server
-php artisan bluesky:firehose-serve
+# Start firehose WebSocket server (requires cmd parameter)
+php artisan bluesky:firehose start
 
-# Start Jetstream WebSocket server
-php artisan bluesky:jetstream-serve
+# Start Jetstream WebSocket server (requires cmd parameter)
+php artisan bluesky:ws start
+
+# Start Jetstream with collection filters
+php artisan bluesky:ws start -C app.bsky.feed.post -C app.bsky.feed.like
+
+# Start Jetstream with DID filters
+php artisan bluesky:ws start -D did:plc:example -D did:plc:another
 
 # Setup labeler service
 php artisan bluesky:labeler:setup
 
-# Start labeler WebSocket server
-php artisan bluesky:labeler:server
+# Start labeler WebSocket server (requires cmd parameter)
+php artisan bluesky:labeler:server start
+
+# Start labeler with Jetstream integration
+php artisan bluesky:labeler:server start --jetstream
+
+# Start labeler with Firehose integration
+php artisan bluesky:labeler:server start --firehose
 
 # Declare labeler service labels
 php artisan bluesky:labeler:declare-labels
 
 # Start labeler polling service
-php artisan bluesky:labeler:polling
+php artisan bluesky:labeler:polling --limit=50
 ```
 
 ## Code Architecture
