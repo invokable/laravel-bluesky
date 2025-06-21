@@ -49,7 +49,7 @@ php artisan bluesky:labeler:new-private-key
 php artisan bluesky:download-repo did:plc:example
 
 # Start firehose WebSocket server
-php artisan bluesky:firehose-serve
+php artisan bluesky:firehose
 
 # Setup labeler service
 php artisan bluesky:labeler:setup
