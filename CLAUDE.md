@@ -77,13 +77,13 @@ php artisan bluesky:jetstream-serve
 php artisan bluesky:labeler:setup
 
 # Start labeler WebSocket server
-php artisan bluesky:labeler-serve
+php artisan bluesky:labeler:server
 
 # Declare labeler service labels
-php artisan bluesky:labeler-declare-labels
+php artisan bluesky:labeler:declare-labels
 
 # Start labeler polling service
-php artisan bluesky:labeler-polling
+php artisan bluesky:labeler:polling
 ```
 
 ## Code Architecture
