@@ -21,7 +21,9 @@ use Revolution\Bluesky\FeedGenerator\FeedGenerator;
 FeedGenerator::register(name: 'artisan', algo: function(int $limit, ?string $cursor, ?string $user, Request $request): array {
     // The implementation is entirely up to you.
 
-    $response = Bluesky::searchPosts(q: '#laravel', until: $cursor, limit: $limit);
+    // Use authentication due to temporary API restriction
+    $response = Bluesky::login(identifier: config('bluesky.identifier'), password: config('bluesky.password'))
+                       ->searchPosts(q: '#laravel', until: $cursor, limit: $limit);
 
     $cursor = data_get($response->collect('posts')->last(), 'indexedAt');
 
