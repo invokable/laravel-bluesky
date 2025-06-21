@@ -14,3 +14,4 @@ phpunit.xml export-ignore
 /workbench export-ignore
 testbench.yaml export-ignore
 pint.json export-ignore
+CLAUDE.md export-ignore
