@@ -78,7 +78,6 @@ final class DPoP
 
         $payload = [
             'nonce' => $nonce,
-            'iss' => $iss,
             'htu' => $url,
             'htm' => $method,
             'jti' => Str::random(64),

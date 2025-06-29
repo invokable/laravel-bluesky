@@ -58,10 +58,12 @@ final class OAuthAgent implements Agent
 
     protected function apiRequestMiddleware(RequestInterface $request): RequestInterface
     {
+        $uri = $request->getUri();
+
         $dpop_proof = DPoP::apiProof(
             jwk: DPoP::load(),
             iss: $this->session()->issuer(default: Bluesky::entryway()),
-            url: (string) $request->getUri(),
+            url: $uri->getScheme().'://'.$uri->getHost().$uri->getPath(),
             token: $this->token(),
             nonce: $this->session(DPoP::API_NONCE, ''),
             method: $request->getMethod(),

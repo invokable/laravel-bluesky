@@ -27,6 +27,7 @@ trait WithClientAssertion
             'aud' => $this->authUrl(),
             'jti' => Str::random(40),
             'iat' => now()->timestamp,
+            'exp' => now()->addSeconds(600)->timestamp,
         ];
 
         return JsonWebToken::encode($head, $payload, $key->privatePEM());
