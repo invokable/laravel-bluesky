@@ -17,6 +17,7 @@ use Revolution\Bluesky\Events\Firehose\FirehoseAccountMessage;
 use Revolution\Bluesky\Events\Firehose\FirehoseCommitMessage;
 use Revolution\Bluesky\Events\Firehose\FirehoseIdentityMessage;
 use Revolution\Bluesky\Events\Firehose\FirehoseMessageReceived;
+use Revolution\Bluesky\Events\Firehose\FirehoseSyncMessage;
 use Workerman\Connection\AsyncTcpConnection;
 use Workerman\Worker;
 
@@ -35,6 +36,7 @@ final class FirehoseServer
         '#commit',
         '#identity',
         '#account',
+        '#sync',
     ];
 
     protected const ACTIONS = [
@@ -103,6 +105,7 @@ final class FirehoseServer
             '#commit' => $this->commit($header, $payload, $data),
             '#identity' => $this->identity($header, $payload, $data),
             '#account' => $this->account($header, $payload, $data),
+            '#sync' => $this->sync($header, $payload, $data),
         };
 
         // Finally, dispatch the raw data event
@@ -210,6 +213,27 @@ final class FirehoseServer
         $status = $payload['status'] ?? null;
 
         event(new FirehoseAccountMessage($did, $seq, $time, $active, $status, $raw));
+    }
+
+    /**
+     * @param  array{repo: string, seq: int, time: string, commit: string, blocks: string}  $payload
+     */
+    private function sync(array $header, array $payload, string $raw): void
+    {
+        $required = ['repo', 'seq', 'time', 'commit', 'blocks'];
+        if (! Arr::has($payload, $required)) {
+            return;
+        }
+
+        $this->log('sync', $payload);
+
+        $did = $payload['repo'];
+        $seq = $payload['seq'];
+        $time = $payload['time'];
+        $commit = $payload['commit'];
+        $blocks = $payload['blocks'];
+
+        event(new FirehoseSyncMessage($did, $seq, $time, $commit, $blocks, $raw));
     }
 
     public function log(string $message, null|array|string|int $context = null): void
