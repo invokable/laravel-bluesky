@@ -19,6 +19,7 @@ use Revolution\Bluesky\Socialite\BlueskyProvider;
 use Revolution\Bluesky\Socialite\Key\JsonWebKeySet;
 use Revolution\Bluesky\Socialite\Key\OAuthKey;
 use Revolution\Bluesky\Socialite\OAuthConfig;
+use ReflectionClass;
 use Tests\TestCase;
 
 class SocialiteTest extends TestCase
@@ -384,5 +385,24 @@ class SocialiteTest extends TestCase
 
         $this->assertArrayHasKey('typ', $header);
         $this->assertSame('iss', $payload['iss']);
+    }
+
+    public function test_scopes_match_config(): void
+    {
+        // Get the scopes from BlueskyProvider
+        $provider = Socialite::driver('bluesky');
+        $reflection = new ReflectionClass($provider);
+        $scopesProperty = $reflection->getProperty('scopes');
+        $scopesProperty->setAccessible(true);
+        $providerScopes = $scopesProperty->getValue($provider);
+
+        // Get the scope from configuration
+        $configScope = config('bluesky.oauth.metadata.scope');
+
+        // Convert config scope string to array for comparison
+        $configScopeArray = explode(' ', $configScope);
+
+        // Compare the two
+        $this->assertEquals($configScopeArray, $providerScopes, 'BlueskyProvider::$scopes does not match config(bluesky.oauth.metadata.scope)');
     }
 }
