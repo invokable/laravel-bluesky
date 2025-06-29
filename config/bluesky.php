@@ -35,7 +35,7 @@ return [
 
         // Client Metadata
         'metadata' => [
-            'scope' => env('BLUESKY_OAUTH_SCOPE', 'atproto transition:generic transition:chat.bsky'),
+            'scope' => env('BLUESKY_OAUTH_SCOPE', 'atproto transition:generic transition:email transition:chat.bsky'),
 
             'grant_types' => ['authorization_code', 'refresh_token'],
             'response_types' => ['code'],
