@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Laravel\Socialite\Facades\Socialite;
 use Mockery as m;
+use ReflectionClass;
 use Revolution\Bluesky\Crypto\JsonWebKey;
 use Revolution\Bluesky\Crypto\JsonWebToken;
 use Revolution\Bluesky\Crypto\P256;
@@ -19,7 +20,6 @@ use Revolution\Bluesky\Socialite\BlueskyProvider;
 use Revolution\Bluesky\Socialite\Key\JsonWebKeySet;
 use Revolution\Bluesky\Socialite\Key\OAuthKey;
 use Revolution\Bluesky\Socialite\OAuthConfig;
-use ReflectionClass;
 use Tests\TestCase;
 
 class SocialiteTest extends TestCase
