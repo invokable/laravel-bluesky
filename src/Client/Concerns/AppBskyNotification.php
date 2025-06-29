@@ -31,11 +31,29 @@ trait AppBskyNotification
         );
     }
 
+    public function listActivitySubscriptions(?int $limit = 50, ?string $cursor = null): Response
+    {
+        return $this->call(
+            api: Notification::listActivitySubscriptions,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function listNotifications(?array $reasons = null, ?int $limit = 50, ?bool $priority = null, ?string $cursor = null, ?string $seenAt = null): Response
     {
         return $this->call(
             api: Notification::listNotifications,
             method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function putActivitySubscription(string $subject, array $activitySubscription): Response
+    {
+        return $this->call(
+            api: Notification::putActivitySubscription,
+            method: self::POST,
             params: compact($this->params(__METHOD__)),
         );
     }
