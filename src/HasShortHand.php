@@ -45,7 +45,6 @@ trait HasShortHand
         $record = $record instanceof Recordable ? $record->toRecord() : $record;
 
         return $this->client(auth: true)
-            ->atproto()
             ->createRecord(
                 repo: $repo,
                 collection: $collection,
