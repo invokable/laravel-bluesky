@@ -13,7 +13,7 @@ use Revolution\AtProto\Lexicon\Contracts\Tools\Ozone\Moderation;
 
 trait ToolsOzoneModeration
 {
-    public function emitEvent(array $event, array $subject, string $createdBy, ?array $subjectBlobCids = null): Response
+    public function emitEvent(array $event, array $subject, string $createdBy, ?array $subjectBlobCids = null, ?array $modTool = null): Response
     {
         return $this->call(
             api: Moderation::emitEvent,
@@ -85,7 +85,7 @@ trait ToolsOzoneModeration
         );
     }
 
-    public function queryEvents(?array $types = null, ?string $createdBy = null, ?string $sortDirection = 'desc', ?string $createdAfter = null, ?string $createdBefore = null, ?string $subject = null, ?array $collections = null, ?string $subjectType = null, ?bool $includeAllUserRecords = null, ?int $limit = 50, ?bool $hasComment = null, ?string $comment = null, ?array $addedLabels = null, ?array $removedLabels = null, ?array $addedTags = null, ?array $removedTags = null, ?array $reportTypes = null, ?array $policies = null, ?string $cursor = null): Response
+    public function queryEvents(?array $types = null, ?string $createdBy = null, ?string $sortDirection = 'desc', ?string $createdAfter = null, ?string $createdBefore = null, ?string $subject = null, ?array $collections = null, ?string $subjectType = null, ?bool $includeAllUserRecords = null, ?int $limit = 50, ?bool $hasComment = null, ?string $comment = null, ?array $addedLabels = null, ?array $removedLabels = null, ?array $addedTags = null, ?array $removedTags = null, ?array $reportTypes = null, ?array $policies = null, ?array $modTool = null, ?string $cursor = null): Response
     {
         return $this->call(
             api: Moderation::queryEvents,

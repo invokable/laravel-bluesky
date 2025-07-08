@@ -9,17 +9,11 @@ use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Http\Client\Response;
 use InvalidArgumentException;
-use JetBrains\PhpStorm\ArrayShape;
 use Psr\Http\Message\StreamInterface;
 use Revolution\AtProto\Lexicon\Attributes\Format;
 use Revolution\AtProto\Lexicon\Attributes\KnownValues;
-use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Actor as AtActor;
-use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Feed as AtFeed;
-use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Notification as AtNotification;
 use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Video as AtVideo;
-use Revolution\AtProto\Lexicon\Contracts\Com\Atproto\Identity as AtIdentity;
 use Revolution\AtProto\Lexicon\Contracts\Com\Atproto\Repo as AtRepo;
-use Revolution\AtProto\Lexicon\Contracts\Com\Atproto\Server as AtServer;
 use Revolution\AtProto\Lexicon\Enum\Feed;
 use Revolution\AtProto\Lexicon\Enum\Graph;
 use Revolution\AtProto\Lexicon\Record\App\Bsky\Labeler\AbstractService;
@@ -46,12 +40,12 @@ use function Illuminate\Support\enum_value;
  */
 trait HasShortHand
 {
-    #[ArrayShape(AtRepo::createRecordResponse)]
     public function createRecord(#[Format('at-identifier')] string $repo, #[Format('nsid')] string $collection, Recordable|array $record, ?string $rkey = null, ?bool $validate = null, ?string $swapCommit = null): Response
     {
         $record = $record instanceof Recordable ? $record->toRecord() : $record;
 
         return $this->client(auth: true)
+            ->atproto()
             ->createRecord(
                 repo: $repo,
                 collection: $collection,
@@ -62,7 +56,6 @@ trait HasShortHand
             );
     }
 
-    #[ArrayShape(AtRepo::getRecordResponse)]
     public function getRecord(#[Format('at-identifier')] string $repo, #[Format('nsid')] string $collection, string $rkey, #[Format('cid')] ?string $cid = null): Response
     {
         return $this->client(auth: true)
@@ -74,7 +67,6 @@ trait HasShortHand
             );
     }
 
-    #[ArrayShape(AtRepo::listRecordsResponse)]
     public function listRecords(#[Format('at-identifier')] string $repo, #[Format('nsid')] string $collection, ?int $limit = 50, ?string $cursor = null, ?bool $reverse = null): Response
     {
         return $this->client(auth: true)
@@ -87,7 +79,6 @@ trait HasShortHand
             );
     }
 
-    #[ArrayShape(AtRepo::putRecordResponse)]
     public function putRecord(#[Format('at-identifier')] string $repo, #[Format('nsid')] string $collection, string $rkey, Recordable|array $record, ?bool $validate = null, #[Format('cid')] ?string $swapRecord = null, #[Format('cid')] ?string $swapCommit = null): Response
     {
         $record = $record instanceof Recordable ? $record->toRecord() : $record;
@@ -104,7 +95,6 @@ trait HasShortHand
             );
     }
 
-    #[ArrayShape(AtRepo::deleteRecordResponse)]
     public function deleteRecord(#[Format('at-identifier')] string $repo, #[Format('nsid')] string $collection, string $rkey, #[Format('cid')] ?string $swapRecord = null, #[Format('cid')] ?string $swapCommit = null): Response
     {
         return $this->client(auth: true)
@@ -117,7 +107,6 @@ trait HasShortHand
             );
     }
 
-    #[ArrayShape(AtFeed::getTimelineResponse)]
     public function getTimeline(?string $algorithm = null, ?int $limit = 50, ?string $cursor = null): Response
     {
         return $this->client(auth: true)
@@ -134,7 +123,6 @@ trait HasShortHand
      *
      * @throws AuthenticationException
      */
-    #[ArrayShape(AtFeed::getAuthorFeedResponse)]
     public function getAuthorFeed(#[Format('at-identifier')] ?string $actor = null, ?int $limit = 50, ?string $cursor = null, #[KnownValues(['posts_with_replies', 'posts_no_replies', 'posts_with_media', 'posts_and_author_threads'])] ?string $filter = 'posts_with_replies', ?bool $includePins = null): Response
     {
         return $this->client(auth: true)
@@ -148,7 +136,6 @@ trait HasShortHand
             );
     }
 
-    #[ArrayShape(AtFeed::searchPostsResponse)]
     public function searchPosts(string $q, #[KnownValues(['top', 'latest'])] ?string $sort = 'latest', ?string $since = null, ?string $until = null, #[Format('at-identifier')] ?string $mentions = null, #[Format('at-identifier')] ?string $author = null, #[Format('language')] ?string $lang = null, ?string $domain = null, #[Format('uri')] ?string $url = null, ?array $tag = null, ?int $limit = 25, ?string $cursor = null): Response
     {
         return $this->client(auth: true)
@@ -174,7 +161,6 @@ trait HasShortHand
      *
      * @throws AuthenticationException
      */
-    #[ArrayShape(AtActor::getProfileResponse)]
     public function getProfile(#[Format('at-identifier')] ?string $actor = null): Response
     {
         return $this->client(auth: true)
@@ -204,7 +190,6 @@ trait HasShortHand
      *
      * @throws AuthenticationException
      */
-    #[ArrayShape(AtRepo::putRecordResponse)]
     public function upsertProfile(callable $callback): Response
     {
         $response = $this->getRecord(
@@ -230,7 +215,6 @@ trait HasShortHand
      *
      * @throws AuthenticationException
      */
-    #[ArrayShape(AtRepo::createRecordResponse)]
     public function post(Post|string|array $text): Response
     {
         $post = is_string($text) ? Post::create($text) : $text;
@@ -306,7 +290,6 @@ trait HasShortHand
     /**
      * @throws AuthenticationException
      */
-    #[ArrayShape(AtRepo::createRecordResponse)]
     public function like(Like|StrongRef $subject): Response
     {
         $like = $subject instanceof Like ? $subject : Like::create($subject);
@@ -339,7 +322,6 @@ trait HasShortHand
     /**
      * @throws AuthenticationException
      */
-    #[ArrayShape(AtRepo::createRecordResponse)]
     public function repost(Repost|StrongRef $subject): Response
     {
         $repost = $subject instanceof Repost ? $subject : Repost::create($subject);
@@ -400,7 +382,6 @@ trait HasShortHand
     /**
      * @throws AuthenticationException
      */
-    #[ArrayShape(AtRepo::createRecordResponse)]
     public function follow(Follow|string $did): Response
     {
         $follow = $did instanceof Follow ? $did : Follow::create(did: $did);
@@ -433,7 +414,6 @@ trait HasShortHand
     /**
      * Upload blob.
      */
-    #[ArrayShape(AtRepo::uploadBlobResponse)]
     public function uploadBlob(StreamInterface|string $data, string $type = 'image/png'): Response
     {
         return $this->client(auth: true)
@@ -466,7 +446,6 @@ trait HasShortHand
      *
      * @throws AuthenticationException
      */
-    #[ArrayShape(['did' => 'string', 'error' => 'string', 'jobId' => 'string', 'message' => 'string', 'state' => 'string'])]
     public function uploadVideo(StreamInterface|string $data, #[KnownValues(['video/mp4', 'video/mpeg', 'video/webm', 'video/quicktime', 'image/gif'])] string $type = 'video/mp4'): Response
     {
         // Service auth is required to use the video upload features.
@@ -488,7 +467,6 @@ trait HasShortHand
     /**
      * This will get you the "blob" of the video you uploaded.
      */
-    #[ArrayShape(AtVideo::getJobStatusResponse)]
     public function getJobStatus(string $jobId): Response
     {
         $aud = $this->agent()?->session()->didDoc()->serviceAuthAud();
@@ -502,7 +480,6 @@ trait HasShortHand
             ->getJobStatus($jobId);
     }
 
-    #[ArrayShape(AtVideo::getUploadLimitsResponse)]
     public function getUploadLimits(): Response
     {
         $token = $this->getServiceAuth(aud: VideoClient::VIDEO_SERVICE_DID, lxm: AtVideo::getUploadLimits)
@@ -524,7 +501,6 @@ trait HasShortHand
      * @param  int|null  $exp  The time in Unix Epoch seconds that the JWT expires. Defaults to 60 seconds in the future. The service may enforce certain time bounds on tokens depending on the requested scope.
      * @param  string|null  $lxm  Lexicon (XRPC) method to bind the requested token to
      */
-    #[ArrayShape(AtServer::getServiceAuthResponse)]
     public function getServiceAuth(#[Format('did')] string $aud, ?int $exp = null, #[Format('nsid')] ?string $lxm = null): Response
     {
         return $this->client(auth: true)
@@ -539,7 +515,6 @@ trait HasShortHand
      *
      * @throws AuthenticationException
      */
-    #[ArrayShape(AtRepo::putRecordResponse)]
     public function publishFeedGenerator(BackedEnum|string $name, Generator $generator): Response
     {
         return $this->putRecord(
@@ -580,14 +555,12 @@ trait HasShortHand
     /**
      * @param  string  $handle  `***.bsky.social` `alice.test`
      */
-    #[ArrayShape(AtIdentity::resolveHandleResponse)]
     public function resolveHandle(#[Format('handle')] string $handle): Response
     {
         return $this->client(auth: false)
             ->resolveHandle(handle: $handle);
     }
 
-    #[ArrayShape(AtNotification::listNotificationsResponse)]
     public function listNotifications(?array $reasons = null, ?int $limit = 50, ?bool $priority = null, ?string $cursor = null, ?string $seenAt = null): Response
     {
         return $this->client(auth: true)
@@ -601,7 +574,6 @@ trait HasShortHand
             );
     }
 
-    #[ArrayShape(AtNotification::getUnreadCountResponse)]
     public function countUnreadNotifications(?bool $priority = null, ?string $seenAt = null): Response
     {
         return $this->client(auth: true)

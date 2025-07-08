@@ -13,7 +13,7 @@ use Revolution\AtProto\Lexicon\Contracts\Com\Atproto\Moderation;
 
 trait ComAtprotoModeration
 {
-    public function createReport(string $reasonType, array $subject, ?string $reason = null): Response
+    public function createReport(string $reasonType, array $subject, ?string $reason = null, ?array $modTool = null): Response
     {
         return $this->call(
             api: Moderation::createReport,
