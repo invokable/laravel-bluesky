@@ -76,10 +76,19 @@ trait AppBskyNotification
         );
     }
 
-    public function registerPush(string $serviceDid, string $token, string $platform, string $appId): Response
+    public function registerPush(string $serviceDid, string $token, string $platform, string $appId, ?bool $ageRestricted = null): Response
     {
         return $this->call(
             api: Notification::registerPush,
+            method: self::POST,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function unregisterPush(string $serviceDid, string $token, string $platform, string $appId): Response
+    {
+        return $this->call(
+            api: Notification::unregisterPush,
             method: self::POST,
             params: compact($this->params(__METHOD__)),
         );

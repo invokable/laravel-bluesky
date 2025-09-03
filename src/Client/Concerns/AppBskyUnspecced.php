@@ -13,6 +13,15 @@ use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Unspecced;
 
 trait AppBskyUnspecced
 {
+    public function getAgeAssuranceState(): Response
+    {
+        return $this->call(
+            api: Unspecced::getAgeAssuranceState,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function getConfig(): Response
     {
         return $this->call(
@@ -144,6 +153,15 @@ trait AppBskyUnspecced
         return $this->call(
             api: Unspecced::getTrendsSkeleton,
             method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function initAgeAssurance(string $email, string $language, string $countryCode): Response
+    {
+        return $this->call(
+            api: Unspecced::initAgeAssurance,
+            method: self::POST,
             params: compact($this->params(__METHOD__)),
         );
     }

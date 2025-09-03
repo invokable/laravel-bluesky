@@ -85,10 +85,19 @@ trait AppBskyGraph
         );
     }
 
-    public function getLists(string $actor, ?int $limit = 50, ?string $cursor = null): Response
+    public function getLists(string $actor, ?int $limit = 50, ?string $cursor = null, ?array $purposes = null): Response
     {
         return $this->call(
             api: Graph::getLists,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getListsWithMembership(string $actor, ?int $limit = 50, ?string $cursor = null, ?array $purposes = null): Response
+    {
+        return $this->call(
+            api: Graph::getListsWithMembership,
             method: self::GET,
             params: compact($this->params(__METHOD__)),
         );
@@ -125,6 +134,15 @@ trait AppBskyGraph
     {
         return $this->call(
             api: Graph::getStarterPacks,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getStarterPacksWithMembership(string $actor, ?int $limit = 50, ?string $cursor = null): Response
+    {
+        return $this->call(
+            api: Graph::getStarterPacksWithMembership,
             method: self::GET,
             params: compact($this->params(__METHOD__)),
         );

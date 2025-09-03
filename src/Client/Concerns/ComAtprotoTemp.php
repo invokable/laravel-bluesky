@@ -22,6 +22,15 @@ trait ComAtprotoTemp
         );
     }
 
+    public function checkHandleAvailability(string $handle, ?string $email = null, ?string $birthDate = null): Response
+    {
+        return $this->call(
+            api: Temp::checkHandleAvailability,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function checkSignupQueue(): Response
     {
         return $this->call(
@@ -44,6 +53,15 @@ trait ComAtprotoTemp
     {
         return $this->call(
             api: Temp::requestPhoneVerification,
+            method: self::POST,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function revokeAccountCredentials(string $account): Response
+    {
+        return $this->call(
+            api: Temp::revokeAccountCredentials,
             method: self::POST,
             params: compact($this->params(__METHOD__)),
         );
