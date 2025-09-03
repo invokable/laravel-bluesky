@@ -11,6 +11,7 @@ use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Feed;
 use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Graph;
 use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Labeler;
 use Revolution\Bluesky\Client\Concerns\AppBskyActor;
+use Revolution\Bluesky\Client\Concerns\AppBskyBookmark;
 use Revolution\Bluesky\Client\Concerns\AppBskyFeed;
 use Revolution\Bluesky\Client\Concerns\AppBskyGraph;
 use Revolution\Bluesky\Client\Concerns\AppBskyLabeler;
@@ -20,6 +21,7 @@ use Revolution\Bluesky\Contracts\XrpcClient;
 class BskyClient implements Actor, Feed, Graph, Labeler, XrpcClient
 {
     use AppBskyActor;
+    use AppBskyBookmark;
     use AppBskyFeed;
     use AppBskyGraph;
     use AppBskyLabeler;
