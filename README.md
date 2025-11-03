@@ -1,6 +1,7 @@
 Bluesky(AT Protocol) for Laravel
 ====
 
+[![test](https://github.com/invokable/laravel-bluesky/actions/workflows/test.yml/badge.svg)](https://github.com/invokable/laravel-bluesky/actions/workflows/test.yml)
 [![packagist](https://badgen.net/packagist/v/revolution/laravel-bluesky)](https://packagist.org/packages/revolution/laravel-bluesky)
 [![Maintainability](https://qlty.sh/badges/cd9f285b-4006-4a23-bbf0-fdf266b38cc2/maintainability.svg)](https://qlty.sh/gh/invokable/projects/laravel-bluesky)
 [![Code Coverage](https://qlty.sh/badges/cd9f285b-4006-4a23-bbf0-fdf266b38cc2/test_coverage.svg)](https://qlty.sh/gh/invokable/projects/laravel-bluesky)
