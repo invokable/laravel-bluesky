@@ -13,5 +13,6 @@ phpunit.xml export-ignore
 /src/Console/stubs export-ignore
 /workbench export-ignore
 testbench.yaml export-ignore
+testbench.yaml.example export-ignore
 pint.json export-ignore
 CLAUDE.md export-ignore
