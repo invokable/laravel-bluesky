@@ -31,6 +31,24 @@ trait AppBskyUnspecced
         );
     }
 
+    public function getOnboardingSuggestedStarterPacks(?int $limit = 10): Response
+    {
+        return $this->call(
+            api: Unspecced::getOnboardingSuggestedStarterPacks,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getOnboardingSuggestedStarterPacksSkeleton(?string $viewer = null, ?int $limit = 10): Response
+    {
+        return $this->call(
+            api: Unspecced::getOnboardingSuggestedStarterPacksSkeleton,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function getPopularFeedGenerators(?int $limit = 50, ?string $cursor = null, ?string $query = null): Response
     {
         return $this->call(

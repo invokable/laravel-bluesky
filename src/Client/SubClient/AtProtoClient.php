@@ -13,6 +13,7 @@ use Revolution\AtProto\Lexicon\Contracts\Com\Atproto\Repo;
 use Revolution\AtProto\Lexicon\Contracts\Com\Atproto\Server;
 use Revolution\Bluesky\Client\Concerns\ComAtprotoIdentity;
 use Revolution\Bluesky\Client\Concerns\ComAtprotoLabel;
+use Revolution\Bluesky\Client\Concerns\ComAtprotoLexicon;
 use Revolution\Bluesky\Client\Concerns\ComAtprotoModeration;
 use Revolution\Bluesky\Client\Concerns\ComAtprotoRepo;
 use Revolution\Bluesky\Client\Concerns\ComAtprotoServer;
@@ -23,6 +24,7 @@ class AtProtoClient implements Identity, Label, Moderation, Repo, Server, XrpcCl
 {
     use ComAtprotoIdentity;
     use ComAtprotoLabel;
+    use ComAtprotoLexicon;
     use ComAtprotoModeration;
     use ComAtprotoRepo;
     use ComAtprotoServer;

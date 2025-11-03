@@ -13,6 +13,15 @@ use Revolution\AtProto\Lexicon\Contracts\Tools\Ozone\Moderation;
 
 trait ToolsOzoneModeration
 {
+    public function cancelScheduledActions(array $subjects, ?string $comment = null): Response
+    {
+        return $this->call(
+            api: Moderation::cancelScheduledActions,
+            method: self::POST,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function emitEvent(array $event, array $subject, string $createdBy, ?array $subjectBlobCids = null, ?array $modTool = null, ?string $externalId = null): Response
     {
         return $this->call(
@@ -94,7 +103,16 @@ trait ToolsOzoneModeration
         );
     }
 
-    public function queryEvents(?array $types = null, ?string $createdBy = null, ?string $sortDirection = 'desc', ?string $createdAfter = null, ?string $createdBefore = null, ?string $subject = null, ?array $collections = null, ?string $subjectType = null, ?bool $includeAllUserRecords = null, ?int $limit = 50, ?bool $hasComment = null, ?string $comment = null, ?array $addedLabels = null, ?array $removedLabels = null, ?array $addedTags = null, ?array $removedTags = null, ?array $reportTypes = null, ?array $policies = null, ?array $modTool = null, ?string $batchId = null, ?string $ageAssuranceState = null, ?string $cursor = null): Response
+    public function listScheduledActions(array $statuses, ?string $startsAfter = null, ?string $endsBefore = null, ?array $subjects = null, ?int $limit = 50, ?string $cursor = null): Response
+    {
+        return $this->call(
+            api: Moderation::listScheduledActions,
+            method: self::POST,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function queryEvents(?array $types = null, ?string $createdBy = null, ?string $sortDirection = 'desc', ?string $createdAfter = null, ?string $createdBefore = null, ?string $subject = null, ?array $collections = null, ?string $subjectType = null, ?bool $includeAllUserRecords = null, ?int $limit = 50, ?bool $hasComment = null, ?string $comment = null, ?array $addedLabels = null, ?array $removedLabels = null, ?array $addedTags = null, ?array $removedTags = null, ?array $reportTypes = null, ?array $policies = null, ?array $modTool = null, ?string $batchId = null, ?string $ageAssuranceState = null, ?bool $withStrike = null, ?string $cursor = null): Response
     {
         return $this->call(
             api: Moderation::queryEvents,
@@ -103,11 +121,20 @@ trait ToolsOzoneModeration
         );
     }
 
-    public function queryStatuses(?int $queueCount = null, ?int $queueIndex = null, ?string $queueSeed = null, ?bool $includeAllUserRecords = null, ?string $subject = null, ?string $comment = null, ?string $reportedAfter = null, ?string $reportedBefore = null, ?string $reviewedAfter = null, ?string $hostingDeletedAfter = null, ?string $hostingDeletedBefore = null, ?string $hostingUpdatedAfter = null, ?string $hostingUpdatedBefore = null, ?array $hostingStatuses = null, ?string $reviewedBefore = null, ?bool $includeMuted = null, ?bool $onlyMuted = null, ?string $reviewState = null, ?array $ignoreSubjects = null, ?string $lastReviewedBy = null, ?string $sortField = 'lastReportedAt', ?string $sortDirection = 'desc', ?bool $takendown = null, ?bool $appealed = null, ?int $limit = 50, ?array $tags = null, ?array $excludeTags = null, ?string $cursor = null, ?array $collections = null, ?string $subjectType = null, ?int $minAccountSuspendCount = null, ?int $minReportedRecordsCount = null, ?int $minTakendownRecordsCount = null, ?int $minPriorityScore = null, ?string $ageAssuranceState = null): Response
+    public function queryStatuses(?int $queueCount = null, ?int $queueIndex = null, ?string $queueSeed = null, ?bool $includeAllUserRecords = null, ?string $subject = null, ?string $comment = null, ?string $reportedAfter = null, ?string $reportedBefore = null, ?string $reviewedAfter = null, ?string $hostingDeletedAfter = null, ?string $hostingDeletedBefore = null, ?string $hostingUpdatedAfter = null, ?string $hostingUpdatedBefore = null, ?array $hostingStatuses = null, ?string $reviewedBefore = null, ?bool $includeMuted = null, ?bool $onlyMuted = null, ?string $reviewState = null, ?array $ignoreSubjects = null, ?string $lastReviewedBy = null, ?string $sortField = 'lastReportedAt', ?string $sortDirection = 'desc', ?bool $takendown = null, ?bool $appealed = null, ?int $limit = 50, ?array $tags = null, ?array $excludeTags = null, ?string $cursor = null, ?array $collections = null, ?string $subjectType = null, ?int $minAccountSuspendCount = null, ?int $minReportedRecordsCount = null, ?int $minTakendownRecordsCount = null, ?int $minPriorityScore = null, ?int $minStrikeCount = null, ?string $ageAssuranceState = null): Response
     {
         return $this->call(
             api: Moderation::queryStatuses,
             method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function scheduleAction(array $action, array $subjects, string $createdBy, array $scheduling, ?array $modTool = null): Response
+    {
+        return $this->call(
+            api: Moderation::scheduleAction,
+            method: self::POST,
             params: compact($this->params(__METHOD__)),
         );
     }

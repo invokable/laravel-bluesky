@@ -40,6 +40,15 @@ trait ComAtprotoTemp
         );
     }
 
+    public function dereferenceScope(string $scope): Response
+    {
+        return $this->call(
+            api: Temp::dereferenceScope,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function fetchLabels(?int $since = null, ?int $limit = 50): Response
     {
         return $this->call(
