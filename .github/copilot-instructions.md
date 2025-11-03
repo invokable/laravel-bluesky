@@ -167,9 +167,115 @@ The package provides extensive CLI tools:
 **XRPC** - AT Protocol's remote procedure call system. Base communication protocol.
 *Usage: All API endpoints use `/xrpc/` prefix*
 
+## Common Development Commands
+
+### Testing and Quality
+```bash
+# Run tests
+composer test
+
+# Run linting (Laravel Pint)
+composer lint
+
+# Run single test file
+./vendor/bin/phpunit tests/Feature/Client/ClientTest.php
+
+# Generate coverage report
+./vendor/bin/phpunit --coverage-html build/coverage
+```
+
+### Package Development
+```bash
+# Install dependencies
+composer install
+
+# Purge and rediscover package
+composer clear && composer prepare
+
+# Build workbench application
+composer build
+
+# Serve workbench for testing
+composer serve
+
+# Update lexicon client (after protocol changes)
+composer run post-update-cmd
+```
+
+### Console Commands
+```bash
+# Generate OAuth private key
+php artisan bluesky:new-private-key
+
+# Generate labeler private key  
+php artisan bluesky:labeler:new-private-key
+
+# Download AT Protocol repositories
+php artisan bluesky:download-repo did:plc:example
+
+# Download all blob files for an actor
+php artisan bluesky:download-blobs alice.bsky.social
+
+# Download specific record collections
+php artisan bluesky:download-record alice.bsky.social -C app.bsky.feed.post
+
+# Unpack CAR files into individual records
+php artisan bluesky:unpack-repo alice.bsky.social
+
+# Start firehose WebSocket server (requires cmd parameter)
+php artisan bluesky:firehose start
+
+# Start Jetstream WebSocket server (requires cmd parameter)
+php artisan bluesky:ws start
+
+# Start Jetstream with collection filters
+php artisan bluesky:ws start -C app.bsky.feed.post -C app.bsky.feed.like
+
+# Start Jetstream with DID filters
+php artisan bluesky:ws start -D did:plc:example -D did:plc:another
+
+# Setup labeler service
+php artisan bluesky:labeler:setup
+
+# Start labeler WebSocket server (requires cmd parameter)
+php artisan bluesky:labeler:server start
+
+# Start labeler with Jetstream integration
+php artisan bluesky:labeler:server start --jetstream
+
+# Start labeler with Firehose integration
+php artisan bluesky:labeler:server start --firehose
+
+# Declare labeler service labels
+php artisan bluesky:labeler:declare-labels
+
+# Start labeler polling service
+php artisan bluesky:labeler:polling --limit=50
+```
+
 ## Copilot Coding Guidelines
 
 This section provides explicit coding conventions and quality standards for contributing to the Laravel Bluesky package. Follow these guidelines to ensure code consistency and maintainability.
+
+### Design Patterns
+
+The package uses these key design patterns:
+- **Factory Pattern**: `BlueskyManager` implements `Factory` contract for authentication state management
+- **Agent Pattern**: Separate agent classes handle different authentication methods and session management
+- **Sub-client Pattern**: Domain-specific HTTP clients for different AT Protocol namespaces
+- **Trait Composition**: `HasShortHand` provides high-level API methods, `HasHttp` manages HTTP client functionality
+
+### Architecture Layers
+
+**Authentication Layer**: Dual authentication system supporting both OAuth 2.0+DPoP (`OAuthAgent`/`OAuthSession`) and legacy app passwords (`LegacyAgent`/`LegacySession`). The `BlueskyManager` factory orchestrates authentication and provides unified API access.
+
+**Client Architecture**: Layered HTTP client system with `AtpClient` as the main orchestrator that routes requests to specialized sub-clients (`BskyClient`, `VideoClient`, `ChatClient`, etc.). Each client handles specific AT Protocol namespaces and includes auto-generated API methods from lexicon contracts.
+
+**Record System**: AT Protocol record types (`Post`, `Profile`, `Like`, etc.) implement the `Recordable` contract and provide fluent builders. The `TextBuilder` class handles rich text with automatic facet detection for mentions, links, and hashtags.
+
+**Feed Generator Framework**: Complete system for creating custom Bluesky feeds with `FeedGenerator` algorithm registry, HTTP controllers, and JWT authentication via `ValidateAuth`.
+
+**Labeler Service**: Content moderation system with `Labeler` core logic, WebSocket/HTTP servers, and cryptographic label signing capabilities.
 
 ### Code Structure Conventions
 
@@ -348,6 +454,20 @@ BlueskyRoute::to(oauth: $session)
 - [ ] Test both success and failure scenarios
 - [ ] Maintain or improve code coverage
 
+### Common Testing Patterns
+
+```php
+// Mock Bluesky API responses
+Bluesky::shouldReceive('login->post')
+    ->once()
+    ->andReturn(new Response(200, [], '{"success": true}'));
+
+// Test feed algorithms in isolation
+FeedGenerator::register('test', function($limit, $cursor) {
+    return ['cursor' => null, 'feed' => [['post' => 'at://test']]];
+});
+```
+
 #### Documentation Requirements
 - [ ] Update relevant documentation files
 - [ ] Include inline code examples
@@ -360,5 +480,21 @@ BlueskyRoute::to(oauth: $session)
 - [ ] Implements proper XRPC request/response patterns
 - [ ] Uses correct content types and encoding
 - [ ] Validates AT Protocol data structures
+
+### AT Protocol Integration Details
+
+**Data Formats**: Handles CAR (Content Addressable Archive) files, CBOR encoding, CID (Content Identifier) verification, and TID (Timestamp Identifier) generation.
+
+**Cryptography**: Supports ECDSA P-256/K-256 key pairs, JWT signing, DPoP proof generation, and `did:key` format handling.
+
+**Identity Resolution**: Automatic DID document parsing, PDS discovery, and handle-to-DID resolution via DNS and well-known endpoints.
+
+### Troubleshooting Common Issues
+
+- **OAuth Authentication**: Ensure private key is base64url encoded and properly configured
+- **WebSocket Servers**: Verify `workerman/workerman` and `revolt/event-loop` are installed
+- **CAR File Processing**: Check file permissions and storage configuration
+- **DID Resolution**: Verify network connectivity for DNS/HTTPS lookups
+- **Feed Generator**: Ensure proper JWT validation and route configuration
 
 This ensures all contributions maintain the high quality standards and architectural consistency that make this package reliable and easy to use for Laravel developers.
