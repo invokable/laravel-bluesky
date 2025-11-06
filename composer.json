@@ -26,7 +26,8 @@
         "orchestra/testbench": "^9.0||^10.0",
         "workerman/workerman": "^5.0",
         "revolt/event-loop": "^1.0",
-        "laravel/pint": "^1.22"
+        "laravel/pint": "^1.22",
+        "revolution/laravel-boost-copilot-cli": "^1.0"
     },
     "autoload": {
         "psr-4": {

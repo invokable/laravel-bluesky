@@ -1,0 +1,11 @@
+{
+    "agents": [
+        "copilot"
+    ],
+    "editors": [
+        "copilot-cli"
+    ],
+    "guidelines": [
+        "revolution/laravel-boost-copilot-cli"
+    ]
+}

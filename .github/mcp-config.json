@@ -1,0 +1,14 @@
+{
+    "mcpServers": {
+        "laravel-boost": {
+            "type": "local",
+            "command": "./vendor/bin/testbench",
+            "args": [
+                "boost:mcp"
+            ],
+            "tools": [
+                "*"
+            ]
+        }
+    }
+}
