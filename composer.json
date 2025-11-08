@@ -68,7 +68,8 @@
             "@prepare"
         ],
         "post-update-cmd": [
-            "@php vendor/bin/testbench bluesky:lexicon-client"
+            "@php vendor/bin/testbench bluesky:lexicon-client",
+            "@php vendor/bin/testbench boost:update --ansi"
         ],
         "clear": "@php vendor/bin/testbench package:purge-skeleton --ansi",
         "prepare": "@php vendor/bin/testbench package:discover --ansi",
