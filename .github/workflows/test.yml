@@ -26,7 +26,7 @@ jobs:
           php-version: ${{ matrix.php-versions }}
           coverage: xdebug
       - name: Install Composer dependencies
-        run: composer install -q
+        run: composer install --prefer-dist --no-interaction --no-progress --no-scripts
       - name: Test
         run: vendor/bin/phpunit
       - name: Code Coverage
