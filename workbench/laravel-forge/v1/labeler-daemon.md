@@ -1,7 +1,10 @@
-Background process
+Labeler Daemon
 ====
 
-On the screen to add a background process, select the **Custom** tab instead of the Queue Worker tab.
+## Directory
+```
+/home/forge/labeler.example.com/
+```
 
 ## Command
 ```

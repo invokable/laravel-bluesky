@@ -1,23 +1,20 @@
-cd /home/forge/labeler.example.com
-git pull origin $FORGE_SITE_BRANCH
+$CREATE_RELEASE()
+
+cd $FORGE_RELEASE_DIRECTORY
 
 $FORGE_COMPOSER install --no-dev --no-interaction --prefer-dist --optimize-autoloader
+$FORGE_PHP artisan optimize
+$FORGE_PHP artisan storage:link
+$FORGE_PHP artisan migrate --force
 
-( flock -w 10 9 || exit 1
-    echo 'Restarting FPM...'; sudo -S service $FORGE_PHP_FPM reload ) 9>/tmp/fpmlock
+# If you are using zero-downtime deployments with the new Laravel Forge in 2025, please adjust as we have not confirmed that this will work correctly.
 
-if [ -f artisan ]; then
-    $FORGE_PHP artisan config:cache
-    $FORGE_PHP artisan route:cache
-    $FORGE_PHP artisan event:cache
-    $FORGE_PHP artisan view:cache
+# After being stopped during deployment, the Labeler Server is automatically restarted by Supervisor.
+$FORGE_PHP artisan bluesky:labeler:server status
+$FORGE_PHP artisan bluesky:labeler:server stop
 
-    $FORGE_PHP artisan migrate --force
+npm ci || npm install && npm run build
 
-    npm ci
-    npm run build
+$ACTIVATE_RELEASE()
 
-    # After being stopped during deployment, the Labeler Server is automatically restarted by Supervisor.
-    $FORGE_PHP artisan bluesky:labeler:server status
-    $FORGE_PHP artisan bluesky:labeler:server stop
-fi
+$RESTART_QUEUES()
