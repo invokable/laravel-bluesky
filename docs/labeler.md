@@ -169,6 +169,12 @@ php artisan bluesky:labeler:declare-labels
 
 This command can also be run locally.
 
+## Delete label definitions
+
+```shell
+php artisan bluesky:labeler:delete-labels
+```
+
 ## Database
 
 Prepared with reference to migration and Eloquent.
