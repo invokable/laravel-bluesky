@@ -19,6 +19,7 @@ use Revolution\Bluesky\Console\Labeler\LabelerDeclareLabelsCommand;
 use Revolution\Bluesky\Console\Labeler\LabelerDeleteLabelsCommand;
 use Revolution\Bluesky\Console\Labeler\LabelerNewPrivateKeyCommand;
 use Revolution\Bluesky\Console\Labeler\LabelerPollingCommand;
+use Revolution\Bluesky\Console\Labeler\LabelerRestoreCommand;
 use Revolution\Bluesky\Console\Labeler\LabelerServeCommand;
 use Revolution\Bluesky\Console\Labeler\LabelerSetupCommand;
 use Revolution\Bluesky\Console\LexiconClientCommand;
@@ -60,6 +61,7 @@ class BlueskyServiceProvider extends ServiceProvider
                 FirehoseServeCommand::class,
                 LabelerNewPrivateKeyCommand::class,
                 LabelerSetupCommand::class,
+                LabelerRestoreCommand::class,
                 LabelerPollingCommand::class,
                 LabelerDeclareLabelsCommand::class,
                 LabelerDeleteLabelsCommand::class,
