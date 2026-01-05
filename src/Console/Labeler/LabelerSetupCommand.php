@@ -91,6 +91,7 @@ class LabelerSetupCommand extends Command
 
         $res = Bluesky::login($did, $password, $service)
             ->client()
+            ->atproto()
             ->requestPlcOperationSignature();
 
         if ($res->failed()) {
