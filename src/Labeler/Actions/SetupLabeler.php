@@ -38,7 +38,8 @@ class SetupLabeler
             $operation['verificationMethods'] = $credentials->collect('verificationMethods')
                 ->merge([
                     'atproto_label' => $didkey,
-                ]);
+                ])
+                ->toArray();
         }
 
         if ($credentials->json('services.atproto_labeler.endpoint') !== $endpoint) {
