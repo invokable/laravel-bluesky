@@ -13,7 +13,7 @@ use Revolution\Bluesky\Facades\Bluesky;
  */
 class RestoreLabeler
 {
-    public function __invoke(string $did, string $password, string $service, string $plcToken, string $endpoint): array
+    public function __invoke(string $did, string $password, string $service, string $plcToken): array
     {
         Bluesky::login($did, $password, $service);
 

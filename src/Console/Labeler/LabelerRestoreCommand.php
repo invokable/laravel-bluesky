@@ -6,7 +6,6 @@ namespace Revolution\Bluesky\Console\Labeler;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Revolution\Bluesky\Facades\Bluesky;
 use Revolution\Bluesky\Labeler\Actions\RestoreLabeler;
@@ -70,13 +69,6 @@ class LabelerRestoreCommand extends Command
             hint: 'URL of the PDS where the account is located',
         );
 
-        $endpoint = text(
-            label: 'Enter Endpoint URL',
-            default: Str::rtrim(url('/'), '/'),
-            required: true,
-            hint: 'URL where the labeler will be hosted',
-        );
-
         $res = Bluesky::login($did, $password, $service)
             ->client()
             ->atproto()
@@ -94,7 +86,7 @@ class LabelerRestoreCommand extends Command
             hint: 'You will receive a confirmation code via email.',
         );
 
-        $restoreLabeler($did, $password, $service, $plcToken, $endpoint);
+        $restoreLabeler($did, $password, $service, $plcToken);
 
         $this->info('If successful, PLC will be updated: https://plc.directory/'.$did);
 
