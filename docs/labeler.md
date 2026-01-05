@@ -175,6 +175,12 @@ This command can also be run locally.
 php artisan bluesky:labeler:delete-labels
 ```
 
+## Restore Labeler to normal account
+
+```shell
+php artisan bluesky:labeler:restore
+```
+
 ## Database
 
 Prepared with reference to migration and Eloquent.
