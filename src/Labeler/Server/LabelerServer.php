@@ -23,8 +23,6 @@ final class LabelerServer
 
     protected int $port = 7000;
 
-    protected int $http_port = 443;
-
     public function start(?string $host = null, ?int $port = null): void
     {
         if (! is_null($host)) {
@@ -46,7 +44,7 @@ final class LabelerServer
 
     private function onWorkerStart(Worker $worker): void
     {
-        $http = new Worker('http://'.$this->host.':'.$this->http_port);
+        $http = new Worker('http://'.$this->host.':'.$this->port + 1);
         $http->reusePort = true;
 
         $http->onMessage = (new HttpServer($this->ws))->onMessage(...);
