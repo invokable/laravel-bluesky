@@ -2,10 +2,11 @@
     "agents": [
         "copilot-cli"
     ],
-    "editors": [
-        "copilot-cli"
-    ],
-    "guidelines": [
+    "guidelines": true,
+    "herd_mcp": false,
+    "mcp": true,
+    "packages": [
         "revolution/laravel-boost-copilot-cli"
-    ]
+    ],
+    "sail": false
 }

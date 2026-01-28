@@ -27,7 +27,7 @@
         "workerman/workerman": "^5.0",
         "revolt/event-loop": "^1.0",
         "laravel/pint": "^1.22",
-        "revolution/laravel-boost-copilot-cli": "^1.0"
+        "revolution/laravel-boost-copilot-cli": "^2.0"
     },
     "autoload": {
         "psr-4": {
