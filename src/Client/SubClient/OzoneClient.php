@@ -14,11 +14,13 @@ use Revolution\AtProto\Lexicon\Contracts\Tools\Ozone\Team;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneCommunication;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneHosting;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneModeration;
+use Revolution\Bluesky\Client\Concerns\ToolsOzoneSafelink;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneServer;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneSet;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneSetting;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneSignature;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneTeam;
+use Revolution\Bluesky\Client\Concerns\ToolsOzoneVerification;
 use Revolution\Bluesky\Client\HasHttp;
 use Revolution\Bluesky\Contracts\XrpcClient;
 
@@ -33,4 +35,5 @@ class OzoneClient implements Communication, Moderation, Server, Set, Setting, Si
     use ToolsOzoneSetting;
     use ToolsOzoneSignature;
     use ToolsOzoneTeam;
+    use ToolsOzoneVerification;
 }

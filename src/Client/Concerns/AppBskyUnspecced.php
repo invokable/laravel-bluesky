@@ -58,7 +58,7 @@ trait AppBskyUnspecced
         );
     }
 
-    public function getPostThreadOtherV2(string $anchor, ?bool $prioritizeFollowedUsers = null): Response
+    public function getPostThreadOtherV2(string $anchor): Response
     {
         return $this->call(
             api: Unspecced::getPostThreadOtherV2,
@@ -67,7 +67,7 @@ trait AppBskyUnspecced
         );
     }
 
-    public function getPostThreadV2(string $anchor, ?bool $above = null, ?int $below = 6, ?int $branchingFactor = 10, ?bool $prioritizeFollowedUsers = null, ?string $sort = 'oldest'): Response
+    public function getPostThreadV2(string $anchor, ?bool $above = null, ?int $below = 6, ?int $branchingFactor = 10, ?string $sort = 'oldest'): Response
     {
         return $this->call(
             api: Unspecced::getPostThreadV2,
