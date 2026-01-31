@@ -65,7 +65,8 @@
     "scripts": {
         "post-autoload-dump": [
             "@clear",
-            "@prepare"
+            "@prepare",
+            "@build"
         ],
         "post-update-cmd": [
             "@php vendor/bin/testbench bluesky:lexicon-client"
