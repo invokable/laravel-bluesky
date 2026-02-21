@@ -9,13 +9,14 @@ Bluesky(AT Protocol) for Laravel
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/invokable/laravel-bluesky)
 
 ## Requirements
-- PHP >= 8.2
-- Laravel >= 11.x
+- PHP >= 8.3
+- Laravel >= 12.x
 
 ## Version
-| ver | PHP  | Laravel |
-|-----|------|---------|
-| 1.x | ^8.2 | ^11.x   |
+| ver   | PHP  | Laravel |
+|-------|------|---------|
+| 1.1.x | ^8.2 | ^11.x   |
+| 1.2.x | ^8.3 | ^12.x   |
 
 - The auto-generated code from lexicon may contain breaking changes.
 

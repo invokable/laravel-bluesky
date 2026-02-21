@@ -13,17 +13,17 @@
     "type": "library",
     "license": "MIT",
     "require": {
-        "php": "^8.2",
-        "illuminate/support": "^11.30||^12.0",
+        "php": "^8.3",
+        "illuminate/support": "^12.0||^13.0",
         "laravel/socialite": "^5.16",
         "guzzlehttp/guzzle": "^7.8",
         "firebase/php-jwt": "^7.0",
         "phpseclib/phpseclib": "^3.0",
-        "revolution/atproto-lexicon-contracts": "1.0.86",
+        "revolution/atproto-lexicon-contracts": "1.0.87",
         "yocto/yoclib-multibase": "^1.2"
     },
     "require-dev": {
-        "orchestra/testbench": "^9.0||^10.0",
+        "orchestra/testbench": "^10.0",
         "workerman/workerman": "^5.0",
         "revolt/event-loop": "^1.0",
         "laravel/pint": "^1.22",
