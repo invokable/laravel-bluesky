@@ -7,6 +7,7 @@ namespace Revolution\Bluesky\Facades;
 use BackedEnum;
 use Illuminate\Http\Client\Response;
 use Illuminate\Support\Facades\Facade;
+use Revolution\Bluesky\BlueskyManager;
 use Revolution\Bluesky\Client\AtpClient;
 use Revolution\Bluesky\Client\SubClient\BskyClient;
 use Revolution\Bluesky\Contracts\Agent;
@@ -29,7 +30,7 @@ use Revolution\Bluesky\Support\PDS;
  * @method static PDS pds()
  * @method static string entryway(?string $path = null)
  *
- * @mixin \Revolution\Bluesky\BlueskyManager
+ * @mixin BlueskyManager
  */
 class Bluesky extends Facade
 {

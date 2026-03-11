@@ -6,6 +6,7 @@ namespace Revolution\Bluesky\Validation;
 
 use Closure;
 use Illuminate\Contracts\Validation\ValidationRule;
+use Illuminate\Translation\PotentiallyTranslatedString;
 use Revolution\Bluesky\Support\Identity;
 
 class AtActor implements ValidationRule
@@ -18,7 +19,7 @@ class AtActor implements ValidationRule
     /**
      * Run the validation rule.
      *
-     * @param  \Closure(string, ?string=): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @param  Closure(string, ?string=): PotentiallyTranslatedString  $fail
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
