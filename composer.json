@@ -19,11 +19,11 @@
         "guzzlehttp/guzzle": "^7.8",
         "firebase/php-jwt": "^7.0",
         "phpseclib/phpseclib": "^3.0",
-        "revolution/atproto-lexicon-contracts": "1.0.87",
+        "revolution/atproto-lexicon-contracts": "1.0.89",
         "yocto/yoclib-multibase": "^1.2"
     },
     "require-dev": {
-        "orchestra/testbench": "^10.0",
+        "orchestra/testbench": "^11.0",
         "workerman/workerman": "^5.0",
         "revolt/event-loop": "^1.0",
         "laravel/pint": "^1.22",
