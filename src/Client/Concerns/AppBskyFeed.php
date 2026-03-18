@@ -166,7 +166,7 @@ trait AppBskyFeed
         );
     }
 
-    public function sendInteractions(array $interactions): Response
+    public function sendInteractions(array $interactions, ?string $feed = null): Response
     {
         return $this->call(
             api: Feed::sendInteractions,
