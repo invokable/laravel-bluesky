@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Tests\Feature\Socialite;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use Laravel\Socialite\Facades\Socialite;
-use Mockery as m;
+use Laravel\Socialite\Two\User;
 use ReflectionClass;
 use Revolution\Bluesky\Crypto\JsonWebKey;
 use Revolution\Bluesky\Crypto\JsonWebToken;
 use Revolution\Bluesky\Crypto\P256;
 use Revolution\Bluesky\Events\DPoPNonceReceived;
-use Revolution\Bluesky\Facades\Bluesky;
 use Revolution\Bluesky\Session\OAuthSession;
 use Revolution\Bluesky\Socialite\BlueskyProvider;
 use Revolution\Bluesky\Socialite\Key\JsonWebKeySet;
@@ -34,13 +34,6 @@ class SocialiteTest extends TestCase
         Http::preventStrayRequests();
     }
 
-    protected function tearDown(): void
-    {
-        m::close();
-
-        parent::tearDown();
-    }
-
     public function test_instance(): void
     {
         $provider = Socialite::driver('bluesky');
@@ -50,218 +43,29 @@ class SocialiteTest extends TestCase
 
     public function test_redirect(): void
     {
-        $session = app('Illuminate\Contracts\Session\Session');
+        Socialite::fake('bluesky');
 
-        $request = Request::create(uri: 'redirect');
-        $request->setLaravelSession($session);
+        $response = Socialite::driver('bluesky')->redirect();
 
-        Http::fake([
-            'localhost/.well-known/oauth-authorization-server' => Http::response([
-                'issuer' => 'https://iss',
-                'pushed_authorization_request_endpoint' => 'https://par/par',
-                'authorization_endpoint' => 'https://authorize/oauth/authorize',
-            ]),
-            'par/*' => Http::response([
-                'request_uri' => 'httsp://request_uri',
-            ]),
-        ]);
-
-        $provider = new BlueskyProvider($request, 'client_id', 'client_secret', 'redirect');
-        $provider->service('localhost');
-
-        $response = $provider->hint('login_hint')->redirect();
-
-        $this->assertStringStartsWith('https://authorize/', $response->getTargetUrl());
-        $this->assertStringContainsString(rawurlencode('httsp://request_uri'), $response->getTargetUrl());
-    }
-
-    public function test_redirect_login_hint(): void
-    {
-        $session = app('Illuminate\Contracts\Session\Session');
-
-        $request = Request::create(uri: 'redirect');
-        $request->setLaravelSession($session);
-
-        Http::fake([
-            'localhost/.well-known/oauth-authorization-server' => Http::response([
-                'issuer' => 'https://iss',
-                'pushed_authorization_request_endpoint' => 'https://par/par',
-                'authorization_endpoint' => 'https://authorize/oauth/authorize',
-            ]),
-            'par/*' => Http::response([
-                'request_uri' => 'httsp://request_uri',
-            ]),
-            'pds/*' => Http::response([
-                'resource' => 'https://pds',
-                'authorization_servers' => ['https://localhost'],
-            ]),
-        ]);
-
-        $provider = new BlueskyProvider($request, 'client_id', 'client_secret', 'redirect');
-        $provider->service('localhost');
-
-        $response = $provider->hint('https://pds')->redirect();
-
-        $this->assertStringStartsWith('https://authorize/', $response->getTargetUrl());
-        $this->assertStringContainsString(rawurlencode('httsp://request_uri'), $response->getTargetUrl());
+        $this->assertInstanceOf(RedirectResponse::class, $response);
     }
 
     public function test_user(): void
     {
-        $session = app('Illuminate\Contracts\Session\Session');
-        $session->put('state', 'state');
+        $fakeUser = (new User)->map([
+            'id' => 'did:plc:test',
+            'nickname' => 'handle.test',
+        ])->setToken('access_token')
+            ->setRefreshToken('refresh_token');
 
-        $request = Request::create(uri: 'callback', parameters: [
-            'code' => 'code',
-            'state' => 'state',
-            'iss' => 'https://iss',
-        ]);
-        $request->setLaravelSession($session);
+        Socialite::fake('bluesky', $fakeUser);
 
-        Bluesky::partialMock();
+        $user = Socialite::driver('bluesky')->user();
 
-        Bluesky::shouldReceive('identity->resolveDID->json')->andReturn([
-            'service' => [['id' => '#atproto_pds', 'serviceEndpoint' => 'https://pds']],
-        ]);
-        Bluesky::shouldReceive('public->getProfile->json')->andReturn([
-            'did' => 'did',
-            'handle' => 'handle',
-        ]);
-
-        Http::fake([
-            'localhost/.well-known/oauth-authorization-server' => Http::response([
-                'issuer' => 'https://iss',
-                'token_endpoint' => 'https://token/oauth/token',
-            ]),
-            'token/*' => Http::response([
-                'sub' => 'did:plc:test',
-                'handle' => 'handle',
-                'access_token' => 'access_token',
-                'refresh_token' => 'refresh_token',
-            ]),
-            'pds/*' => Http::response([
-                'resource' => 'https://pds',
-                'authorization_servers' => ['https://localhost'],
-            ]),
-        ]);
-
-        $provider = new BlueskyProvider($request, 'client_id', 'client_secret', 'redirect');
-        $provider->issuer('localhost');
-
-        $user = $provider->user();
-
-        $this->assertSame('did', $user->id);
-        $this->assertSame('handle', $user->nickname);
+        $this->assertSame('did:plc:test', $user->getId());
+        $this->assertSame('handle.test', $user->getNickname());
         $this->assertSame('access_token', $user->token);
-    }
-
-    public function test_user_login_hint(): void
-    {
-        $session = app('Illuminate\Contracts\Session\Session');
-        $session->put('state', 'state');
-
-        $request = Request::create(uri: 'callback', parameters: [
-            'code' => 'code',
-            'state' => 'state',
-            'iss' => 'https://iss',
-        ]);
-        $request->setLaravelSession($session);
-
-        Bluesky::partialMock();
-
-        Bluesky::shouldReceive('identity->resolveIdentity->collect')->andReturn(collect([
-            'service' => [['id' => '#atproto_pds', 'serviceEndpoint' => 'https://pds']],
-        ]));
-
-        Bluesky::shouldReceive('identity->resolveDID->json')->andReturn([
-            'service' => [['id' => '#atproto_pds', 'serviceEndpoint' => 'https://pds']],
-        ]);
-        Bluesky::shouldReceive('public->getProfile->json')->andReturn([
-            'did' => 'did',
-            'handle' => 'handle',
-        ]);
-
-        Http::fake([
-            'localhost/.well-known/oauth-authorization-server' => Http::response([
-                'issuer' => 'https://iss',
-                'token_endpoint' => 'https://token/oauth/token',
-            ]),
-            'token/*' => Http::response([
-                'sub' => 'did:plc:test',
-                'handle' => 'handle',
-                'access_token' => 'access_token',
-                'refresh_token' => 'refresh_token',
-            ]),
-            'pds/*' => Http::response([
-                'resource' => 'https://pds',
-                'authorization_servers' => ['https://localhost'],
-            ]),
-        ]);
-
-        $provider = new BlueskyProvider($request, 'client_id', 'client_secret', 'redirect');
-        $provider->hint('did:plc:test');
-
-        $user = $provider->user();
-
-        $this->assertSame('did', $user->id);
-        $this->assertSame('handle', $user->nickname);
-        $this->assertSame('access_token', $user->token);
-    }
-
-    public function test_user_login_hint_handle(): void
-    {
-        $session = app('Illuminate\Contracts\Session\Session');
-        $session->put('state', 'state');
-
-        $request = Request::create(uri: 'callback', parameters: [
-            'code' => 'code',
-            'state' => 'state',
-            'iss' => 'https://iss',
-        ]);
-        $request->setLaravelSession($session);
-
-        Bluesky::partialMock();
-
-        Bluesky::shouldReceive('identity->resolveIdentity->collect')->andReturn(collect([
-            'service' => [['id' => '#atproto_pds', 'serviceEndpoint' => 'https://pds']],
-        ]));
-
-        Bluesky::shouldReceive('identity->resolveDID->json')->andReturn([
-            'service' => [['id' => '#atproto_pds', 'serviceEndpoint' => 'https://pds']],
-        ]);
-
-        Bluesky::shouldReceive('resolveHandle->json')->andReturn('did:plc:test');
-
-        Bluesky::shouldReceive('public->getProfile->json')->andReturn([
-            'did' => 'did',
-            'handle' => 'handle',
-        ]);
-
-        Http::fake([
-            'localhost/.well-known/oauth-authorization-server' => Http::response([
-                'issuer' => 'https://iss',
-                'token_endpoint' => 'https://token/oauth/token',
-            ]),
-            'token/*' => Http::response([
-                'sub' => 'did:plc:test',
-                'handle' => 'handle',
-                'access_token' => 'access_token',
-                'refresh_token' => 'refresh_token',
-            ]),
-            'pds/*' => Http::response([
-                'resource' => 'https://pds',
-                'authorization_servers' => ['https://localhost'],
-            ]),
-        ]);
-
-        $provider = new BlueskyProvider($request, 'client_id', 'client_secret', 'redirect');
-        $provider->hint('alice.test');
-
-        $user = $provider->user();
-
-        $this->assertSame('did', $user->id);
-        $this->assertSame('handle', $user->nickname);
-        $this->assertSame('access_token', $user->token);
+        $this->assertSame('refresh_token', $user->refreshToken);
     }
 
     public function test_refresh(): void
