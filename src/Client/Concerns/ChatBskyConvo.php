@@ -67,6 +67,15 @@ trait ChatBskyConvo
         );
     }
 
+    public function getConvoMembers(string $convoId, ?int $limit = 50, ?string $cursor = null): Response
+    {
+        return $this->call(
+            api: Convo::getConvoMembers,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function getLog(?string $cursor = null): Response
     {
         return $this->call(
@@ -94,11 +103,29 @@ trait ChatBskyConvo
         );
     }
 
-    public function listConvos(?int $limit = 50, ?string $cursor = null, ?string $readState = null, ?string $status = null): Response
+    public function listConvoRequests(?int $limit = 50, ?string $cursor = null): Response
+    {
+        return $this->call(
+            api: Convo::listConvoRequests,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function listConvos(?int $limit = 50, ?string $cursor = null, ?string $readState = null, ?string $status = null, ?string $kind = null): Response
     {
         return $this->call(
             api: Convo::listConvos,
             method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function lockConvo(string $convoId): Response
+    {
+        return $this->call(
+            api: Convo::lockConvo,
+            method: self::POST,
             params: compact($this->params(__METHOD__)),
         );
     }
@@ -134,6 +161,15 @@ trait ChatBskyConvo
     {
         return $this->call(
             api: Convo::sendMessageBatch,
+            method: self::POST,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function unlockConvo(string $convoId): Response
+    {
+        return $this->call(
+            api: Convo::unlockConvo,
             method: self::POST,
             params: compact($this->params(__METHOD__)),
         );

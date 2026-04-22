@@ -139,6 +139,60 @@ trait AppBskyUnspecced
         );
     }
 
+    public function getSuggestedUsersForDiscover(?int $limit = 25): Response
+    {
+        return $this->call(
+            api: Unspecced::getSuggestedUsersForDiscover,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getSuggestedUsersForDiscoverSkeleton(?string $viewer = null, ?int $limit = 25): Response
+    {
+        return $this->call(
+            api: Unspecced::getSuggestedUsersForDiscoverSkeleton,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getSuggestedUsersForExplore(?string $category = null, ?int $limit = 25): Response
+    {
+        return $this->call(
+            api: Unspecced::getSuggestedUsersForExplore,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getSuggestedUsersForExploreSkeleton(?string $viewer = null, ?string $category = null, ?int $limit = 25): Response
+    {
+        return $this->call(
+            api: Unspecced::getSuggestedUsersForExploreSkeleton,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getSuggestedUsersForSeeMore(?string $category = null, ?int $limit = 25): Response
+    {
+        return $this->call(
+            api: Unspecced::getSuggestedUsersForSeeMore,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getSuggestedUsersForSeeMoreSkeleton(?string $viewer = null, ?string $category = null, ?int $limit = 25): Response
+    {
+        return $this->call(
+            api: Unspecced::getSuggestedUsersForSeeMoreSkeleton,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function getSuggestedUsersSkeleton(?string $viewer = null, ?string $category = null, ?int $limit = 25): Response
     {
         return $this->call(
