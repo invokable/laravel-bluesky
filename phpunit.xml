@@ -26,4 +26,9 @@
     <php>
         <env name="CACHE_STORE" value="array"/>
     </php>
+    <coverage>
+        <report>
+            <clover outputFile="build/logs/clover.xml"/>
+        </report>
+    </coverage>
 </phpunit>
