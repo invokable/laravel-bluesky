@@ -1,5 +1,4 @@
-Testing
-====
+# Testing
 
 Most features are available via `Bluesky` Facade, so you can use standard Laravel mocks when testing.
 

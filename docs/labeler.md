@@ -1,5 +1,4 @@
-Labeler
-====
+# Labeler
 
 It is essential to understand the concept of Labeler beforehand.
 

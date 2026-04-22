@@ -1,5 +1,4 @@
-Verify
-====
+# Verify
 
 Verifiability is a key concept of Bluesky/AtProtocol.
 

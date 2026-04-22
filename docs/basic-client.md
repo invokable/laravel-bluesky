@@ -1,5 +1,4 @@
-Basic Client
-====
+# Basic Client
 
 ## Authentication
 

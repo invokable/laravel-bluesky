@@ -1,5 +1,4 @@
-Feed Generator
-====
+# Feed Generator
 
 Please also refer to the official starter kit.  
 https://github.com/bluesky-social/feed-generator

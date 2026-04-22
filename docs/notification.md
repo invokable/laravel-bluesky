@@ -1,5 +1,4 @@
-Laravel Notifications
-====
+# Laravel Notifications
 
 ## Available Channels
 

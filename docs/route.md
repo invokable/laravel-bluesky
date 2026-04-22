@@ -1,5 +1,4 @@
-Routes defined in the package
-====
+# Routes defined in the package
 
 Some routes are defined in the package. You can disable a route by setting it in config or `.env`.
 

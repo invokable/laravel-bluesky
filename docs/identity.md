@@ -1,5 +1,4 @@
-Resolve Identity
-====
+# Resolve Identity
 
 In Bluesky, mutual resolution of Handle, DID, etc. is often required.
 
