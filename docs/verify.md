@@ -77,7 +77,7 @@ with [com.atproto.sync.getBlob](https://docs.bsky.app/docs/api/com-atproto-sync-
 ```php
 use Revolution\Bluesky\Core\CID;
 
-$cid = data_get($block, 'cid');
+$cid = data_get($block, 'value.embed.images.0.image.ref.$link');
 $file = file_get_contents('path/to/b***image.jpg');
 
 $bool = CID::verify($file, $cid, codec: CID::RAW);
