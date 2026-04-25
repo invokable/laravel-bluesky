@@ -163,18 +163,9 @@ https://bsky.app/
 
 To authenticate with OAuth, read the Socialite documentation.
 
-## Usage
-- [Basic Client](./docs/basic-client.md)
-- [Laravel Notifications](./docs/notification.md)
-- [Socialite](./docs/socialite.md)
-- [FeedGenerator](./docs/feed-generator.md)
-- [Testing](./docs/testing.md)
-
-## Advanced
-- [Identity](./docs/identity.md)
-- [Verify](./docs/verify.md)
-- [Route](./docs/route.md)
-- [Labeler](./docs/labeler.md)
+## Documentation
+- [English](https://kawax.biz/en/packages/laravel-bluesky)
+- [Japanese](https://kawax.biz/jp/packages/laravel-bluesky)
 
 ## Sample project
 - [Labeler](https://github.com/invokable/laralabeler)
