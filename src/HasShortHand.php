@@ -255,6 +255,17 @@ trait HasShortHand
             );
     }
 
+    public function getPostThread(#[Format('at-uri')] string $uri, ?int $depth = 6, ?int $parentHeight = 80): Response
+    {
+        return $this->client(auth: true)
+            ->bsky()
+            ->getPostThread(
+                uri: $uri,
+                depth: $depth,
+                parentHeight: $parentHeight,
+            );
+    }
+
     /**
      * @param  string  $uri  at://did:plc:.../app.bsky.feed.post/{rkey}
      */
