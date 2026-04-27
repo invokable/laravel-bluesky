@@ -32,6 +32,22 @@ This is the only required step, there is no need to register with Bluesky and ob
 
 Strictly speaking, you don't even need your own Bluesky account if you are only providing OAuth login functionality in Laravel.
 
+### Default OAuth Scopes
+
+The package is configured with default OAuth scopes to support three main use cases:
+
+1. **Socialite Login** - `atproto`, `account:email`, and `include:app.bsky.authViewAll` enable user authentication and email access
+2. **Posting** - `include:app.bsky.authCreatePosts` and `blob:*/*` allow creating posts and uploading images/videos
+3. **DM Notifications** - `rpc:chat.bsky.convo.sendMessage` and `rpc:chat.bsky.convo.getConvoForMembers` enable sending direct messages for notifications
+
+You can customize the scopes by setting the `BLUESKY_OAUTH_SCOPE` environment variable:
+
+```
+BLUESKY_OAUTH_SCOPE="atproto account:email include:app.bsky.authViewAll"
+```
+
+For more information about available scopes, see the [AT Protocol Permission Requests documentation](https://atproto.com/guides/permission-requests).
+
 ## Create callback route
 
 The recommended route name is `bluesky.oauth.redirect`.

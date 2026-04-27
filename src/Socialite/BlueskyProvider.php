@@ -38,9 +38,12 @@ class BlueskyProvider extends AbstractProvider implements ProviderInterface
      */
     protected $scopes = [
         'atproto',
-        'transition:generic',
-        'transition:email',
-        'transition:chat.bsky',
+        'include:app.bsky.authViewAll',
+        'include:app.bsky.authCreatePosts',
+        'blob:*/*',
+        'account:email',
+        'rpc:chat.bsky.convo.sendMessage',
+        'rpc:chat.bsky.convo.getConvoForMembers',
     ];
 
     /**
