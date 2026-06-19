@@ -77,7 +77,6 @@ This application is a Laravel application and its main Laravel ecosystems packag
 - Run Artisan commands directly via the command line (e.g., `php artisan route:list`). Use `php artisan list` to discover available commands and `php artisan [command] --help` to check parameters.
 - Inspect routes with `php artisan route:list`. Filter with: `--method=GET`, `--name=users`, `--path=api`, `--except-vendor`, `--only-vendor`.
 - Read configuration values using dot notation: `php artisan config:show app.name`, `php artisan config:show database.default`. Or read config files directly from the `config/` directory.
-- To check environment variables, read the `.env` file directly.
 
 ## Tinker
 
@@ -162,7 +161,7 @@ This application is a Laravel application and its main Laravel ecosystems packag
 ## Laravel Boost for GitHub Copilot CLI
 
 This project uses Laravel Boost to provide MCP (Model Context Protocol) tools for GitHub Copilot CLI.
-The MCP server is configured in `.mcp.json` and automatically loaded by Copilot CLI.
+The MCP server is configured in `.github/mcp.json` and automatically loaded by Copilot CLI.
 
 ### Laravel Package Development Environment
 
