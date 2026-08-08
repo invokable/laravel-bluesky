@@ -19,7 +19,7 @@
         "guzzlehttp/guzzle": "^7.8",
         "firebase/php-jwt": "^7.0",
         "phpseclib/phpseclib": "^3.0",
-        "revolution/atproto-lexicon-contracts": "1.0.93",
+        "revolution/atproto-lexicon-contracts": "1.0.96",
         "yocto/yoclib-multibase": "^1.2"
     },
     "require-dev": {
@@ -81,7 +81,7 @@
             "@php vendor/bin/testbench serve --ansi"
         ],
         "lint": [
-            "vendor/bin/pint"
+            "vendor/bin/pint --parallel"
         ],
         "test": [
             "@php vendor/bin/phpunit"

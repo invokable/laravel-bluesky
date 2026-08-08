@@ -30,4 +30,13 @@ trait ChatBskyActor
             params: compact($this->params(__METHOD__)),
         );
     }
+
+    public function getStatus(): Response
+    {
+        return $this->call(
+            api: Actor::getStatus,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
 }

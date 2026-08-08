@@ -166,6 +166,15 @@ trait AppBskyFeed
         );
     }
 
+    public function searchPostsV2(?string $cursor = null, ?int $limit = 25, ?string $query = null, ?string $sort = null, ?array $authors = null, ?array $mentions = null, ?array $domains = null, ?array $urls = null, ?array $embeddedAtUris = null, ?array $hashtags = null, ?array $excludeAuthors = null, ?array $excludeMentions = null, ?array $excludeDomains = null, ?array $excludeUrls = null, ?array $excludeEmbeddedAtUris = null, ?array $excludeHashtags = null, ?string $since = null, ?string $until = null, ?bool $allTime = null, ?array $languages = null, ?array $excludeLanguages = null, ?bool $hasMedia = null, ?bool $hasVideo = null, ?string $replyParentUri = null, ?string $threadRootUri = null, ?bool $excludeReplies = null, ?bool $repliesOnly = null, ?bool $following = null, ?string $queryLanguage = null): Response
+    {
+        return $this->call(
+            api: Feed::searchPostsV2,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function sendInteractions(array $interactions, ?string $feed = null): Response
     {
         return $this->call(

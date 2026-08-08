@@ -12,6 +12,7 @@ use Revolution\Bluesky\Client\SubClient\AtProtoClient;
 use Revolution\Bluesky\Client\SubClient\BskyClient;
 use Revolution\Bluesky\Client\SubClient\BskyNotification;
 use Revolution\Bluesky\Client\SubClient\ChatClient;
+use Revolution\Bluesky\Client\SubClient\ChatModeration;
 use Revolution\Bluesky\Client\SubClient\OzoneClient;
 use Revolution\Bluesky\Client\SubClient\SyncClient;
 use Revolution\Bluesky\Client\SubClient\VideoClient;
@@ -47,6 +48,18 @@ class AtpClient implements XrpcClient
     public function chat(): ChatClient
     {
         return app(ChatClient::class)
+            ->withHttp($this->http())
+            ->withServiceProxy(ChatClient::CHAT_SERVICE_DID);
+    }
+
+    /**
+     * ChatModeration.
+     *
+     * chat.bsky.moderation
+     */
+    public function chatModeration(): ChatModeration
+    {
+        return app(ChatModeration::class)
             ->withHttp($this->http())
             ->withServiceProxy(ChatClient::CHAT_SERVICE_DID);
     }

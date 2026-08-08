@@ -31,7 +31,7 @@ trait AppBskyGraph
         );
     }
 
-    public function getFollowers(string $actor, ?int $limit = 50, ?string $cursor = null): Response
+    public function getFollowers(string $actor, ?int $limit = 50, ?string $cursor = null, ?string $sort = null): Response
     {
         return $this->call(
             api: Graph::getFollowers,
@@ -40,7 +40,7 @@ trait AppBskyGraph
         );
     }
 
-    public function getFollows(string $actor, ?int $limit = 50, ?string $cursor = null): Response
+    public function getFollows(string $actor, ?int $limit = 50, ?string $cursor = null, ?string $sort = null): Response
     {
         return $this->call(
             api: Graph::getFollows,
@@ -157,7 +157,7 @@ trait AppBskyGraph
         );
     }
 
-    public function muteActor(string $actor): Response
+    public function muteActor(string $actor, ?bool $onlyReposts = null, ?bool $onlyQuoteposts = null): Response
     {
         return $this->call(
             api: Graph::muteActor,
@@ -188,6 +188,15 @@ trait AppBskyGraph
     {
         return $this->call(
             api: Graph::searchStarterPacks,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function searchStarterPacksV2(string $q, ?int $limit = 25, ?string $cursor = null): Response
+    {
+        return $this->call(
+            api: Graph::searchStarterPacksV2,
             method: self::GET,
             params: compact($this->params(__METHOD__)),
         );

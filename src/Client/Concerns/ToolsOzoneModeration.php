@@ -22,7 +22,7 @@ trait ToolsOzoneModeration
         );
     }
 
-    public function emitEvent(array $event, array $subject, string $createdBy, ?array $subjectBlobCids = null, ?array $modTool = null, ?string $externalId = null): Response
+    public function emitEvent(array $event, array $subject, string $createdBy, ?array $subjectBlobCids = null, ?array $modTool = null, ?string $externalId = null, ?array $reportAction = null): Response
     {
         return $this->call(
             api: Moderation::emitEvent,

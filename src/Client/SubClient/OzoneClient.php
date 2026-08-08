@@ -14,6 +14,8 @@ use Revolution\AtProto\Lexicon\Contracts\Tools\Ozone\Team;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneCommunication;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneHosting;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneModeration;
+use Revolution\Bluesky\Client\Concerns\ToolsOzoneQueue;
+use Revolution\Bluesky\Client\Concerns\ToolsOzoneReport;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneSafelink;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneServer;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneSet;
@@ -30,6 +32,7 @@ class OzoneClient implements Communication, Moderation, Server, Set, Setting, Si
     use ToolsOzoneCommunication;
     use ToolsOzoneHosting;
     use ToolsOzoneModeration;
+    use ToolsOzoneQueue;
     use ToolsOzoneServer;
     use ToolsOzoneSet;
     use ToolsOzoneSetting;

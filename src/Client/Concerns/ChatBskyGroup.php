@@ -85,10 +85,10 @@ trait ChatBskyGroup
         );
     }
 
-    public function getGroupPublicInfo(string $code): Response
+    public function getJoinLinkPreviews(array $codes): Response
     {
         return $this->call(
-            api: Group::getGroupPublicInfo,
+            api: Group::getJoinLinkPreviews,
             method: self::GET,
             params: compact($this->params(__METHOD__)),
         );
@@ -98,6 +98,15 @@ trait ChatBskyGroup
     {
         return $this->call(
             api: Group::listJoinRequests,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function listMutualGroups(string $subject, ?int $limit = 50, ?string $cursor = null): Response
+    {
+        return $this->call(
+            api: Group::listMutualGroups,
             method: self::GET,
             params: compact($this->params(__METHOD__)),
         );
@@ -125,6 +134,24 @@ trait ChatBskyGroup
     {
         return $this->call(
             api: Group::requestJoin,
+            method: self::POST,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function updateJoinRequestsRead(string $convoId): Response
+    {
+        return $this->call(
+            api: Group::updateJoinRequestsRead,
+            method: self::POST,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function withdrawJoinRequest(string $convoId): Response
+    {
+        return $this->call(
+            api: Group::withdrawJoinRequest,
             method: self::POST,
             params: compact($this->params(__METHOD__)),
         );

@@ -22,7 +22,34 @@ trait ChatBskyModeration
         );
     }
 
-    public function getMessageContext(string $messageId, ?string $convoId = null, ?int $before = 5, ?int $after = 5): Response
+    public function getConvo(string $convoId): Response
+    {
+        return $this->call(
+            api: Moderation::getConvo,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getConvoMembers(string $convoId, ?int $limit = 50, ?string $cursor = null): Response
+    {
+        return $this->call(
+            api: Moderation::getConvoMembers,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getConvos(array $convoIds): Response
+    {
+        return $this->call(
+            api: Moderation::getConvos,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getMessageContext(string $messageId, ?string $convoId = null, ?int $before = 5, ?int $after = 5, ?int $maxInterleavedSystemMessages = 10): Response
     {
         return $this->call(
             api: Moderation::getMessageContext,

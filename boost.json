@@ -2,7 +2,6 @@
     "agents": [
         "copilot-cli"
     ],
-    "cloud": false,
     "guidelines": true,
     "mcp": true,
     "nightwatch": false,

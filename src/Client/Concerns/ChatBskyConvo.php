@@ -94,6 +94,15 @@ trait ChatBskyConvo
         );
     }
 
+    public function getUnreadCounts(?bool $includeGroupChats = null): Response
+    {
+        return $this->call(
+            api: Convo::getUnreadCounts,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function leaveConvo(string $convoId): Response
     {
         return $this->call(
@@ -112,7 +121,7 @@ trait ChatBskyConvo
         );
     }
 
-    public function listConvos(?int $limit = 50, ?string $cursor = null, ?string $readState = null, ?string $status = null, ?string $kind = null): Response
+    public function listConvos(?int $limit = 50, ?string $cursor = null, ?string $readState = null, ?string $status = null, ?string $kind = null, ?string $lockStatus = null): Response
     {
         return $this->call(
             api: Convo::listConvos,
