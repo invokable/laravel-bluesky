@@ -133,7 +133,7 @@ class SupportTest extends TestCase
         $web = DID::web();
         $example = DID::web('https://example.com/test');
 
-        $this->assertSame('did:web:localhost:8000', $web);
+        $this->assertSame('did:web:localhost', $web);
         $this->assertSame('did:web:example.com', $example);
     }
 }
