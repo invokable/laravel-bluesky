@@ -22,7 +22,7 @@ trait ToolsOzoneQueue
         );
     }
 
-    public function createQueue(string $name, ?array $subjectTypes = null, ?string $collection = null, ?array $reportTypes = null, ?string $description = null, ?array $recommendedPolicies = null): Response
+    public function createQueue(string $name, ?array $subjectTypes = null, ?string $collection = null, ?array $reportTypes = null, ?string $description = null, ?array $recommendedPolicies = null, ?array $recommendedLabels = null): Response
     {
         return $this->call(
             api: Queue::createQueue,
@@ -76,7 +76,7 @@ trait ToolsOzoneQueue
         );
     }
 
-    public function updateQueue(int $queueId, ?string $name = null, ?bool $enabled = null, ?string $description = null, ?array $recommendedPolicies = null): Response
+    public function updateQueue(int $queueId, ?string $name = null, ?bool $enabled = null, ?string $description = null, ?array $recommendedPolicies = null, ?array $recommendedLabels = null): Response
     {
         return $this->call(
             api: Queue::updateQueue,

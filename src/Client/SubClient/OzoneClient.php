@@ -13,6 +13,7 @@ use Revolution\AtProto\Lexicon\Contracts\Tools\Ozone\Signature;
 use Revolution\AtProto\Lexicon\Contracts\Tools\Ozone\Team;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneCommunication;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneHosting;
+use Revolution\Bluesky\Client\Concerns\ToolsOzoneInbox;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneModeration;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneQueue;
 use Revolution\Bluesky\Client\Concerns\ToolsOzoneReport;
@@ -31,6 +32,7 @@ class OzoneClient implements Communication, Moderation, Server, Set, Setting, Si
     use HasHttp;
     use ToolsOzoneCommunication;
     use ToolsOzoneHosting;
+    use ToolsOzoneInbox;
     use ToolsOzoneModeration;
     use ToolsOzoneQueue;
     use ToolsOzoneServer;

@@ -31,6 +31,15 @@ trait ToolsOzoneModeration
         );
     }
 
+    public function getAccountPreferences(string $did): Response
+    {
+        return $this->call(
+            api: Moderation::getAccountPreferences,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function getAccountTimeline(string $did): Response
     {
         return $this->call(

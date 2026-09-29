@@ -121,7 +121,7 @@ trait AppBskyFeed
         );
     }
 
-    public function getQuotes(string $uri, ?string $cid = null, ?int $limit = 50, ?string $cursor = null): Response
+    public function getQuotes(string $uri, ?string $cid = null, ?int $limit = 50, ?string $cursor = null, ?string $sort = null): Response
     {
         return $this->call(
             api: Feed::getQuotes,
