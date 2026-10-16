@@ -94,7 +94,7 @@ trait AppBskyFeed
         );
     }
 
-    public function getListFeed(string $list, ?int $limit = 50, ?string $cursor = null): Response
+    public function getListFeed(string $list, ?int $limit = 50, ?string $cursor = null, ?string $since = null): Response
     {
         return $this->call(
             api: Feed::getListFeed,
@@ -148,7 +148,7 @@ trait AppBskyFeed
         );
     }
 
-    public function getTimeline(?string $algorithm = null, ?int $limit = 50, ?string $cursor = null): Response
+    public function getTimeline(?string $algorithm = null, ?int $limit = 50, ?string $cursor = null, ?string $since = null): Response
     {
         return $this->call(
             api: Feed::getTimeline,

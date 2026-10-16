@@ -13,24 +13,6 @@ use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Graph;
 
 trait AppBskyGraph
 {
-    public function getActorStarterPacks(string $actor, ?int $limit = 50, ?string $cursor = null): Response
-    {
-        return $this->call(
-            api: Graph::getActorStarterPacks,
-            method: self::GET,
-            params: compact($this->params(__METHOD__)),
-        );
-    }
-
-    public function getBlocks(?int $limit = 50, ?string $cursor = null): Response
-    {
-        return $this->call(
-            api: Graph::getBlocks,
-            method: self::GET,
-            params: compact($this->params(__METHOD__)),
-        );
-    }
-
     public function getFollowers(string $actor, ?int $limit = 50, ?string $cursor = null, ?string $sort = null): Response
     {
         return $this->call(
@@ -44,6 +26,24 @@ trait AppBskyGraph
     {
         return $this->call(
             api: Graph::getFollows,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getActorStarterPacks(string $actor, ?int $limit = 50, ?string $cursor = null): Response
+    {
+        return $this->call(
+            api: Graph::getActorStarterPacks,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getBlocks(?int $limit = 50, ?string $cursor = null): Response
+    {
+        return $this->call(
+            api: Graph::getBlocks,
             method: self::GET,
             params: compact($this->params(__METHOD__)),
         );

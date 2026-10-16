@@ -13,7 +13,7 @@ use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Embed;
 
 trait AppBskyEmbed
 {
-    public function getEmbedExternalView(string $url, array $uris): Response
+    public function getEmbedExternalView(string $url, ?string $canonicalUri = null, ?array $uris = null): Response
     {
         return $this->call(
             api: Embed::getEmbedExternalView,

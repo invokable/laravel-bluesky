@@ -13,19 +13,10 @@ use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Unspecced;
 
 trait AppBskyUnspecced
 {
-    public function getAgeAssuranceState(): Response
+    public function getAtmosphereExploreTab(?array $langs = null, ?string $countryCode = null, ?string $regionCode = null): Response
     {
         return $this->call(
-            api: Unspecced::getAgeAssuranceState,
-            method: self::GET,
-            params: compact($this->params(__METHOD__)),
-        );
-    }
-
-    public function getConfig(): Response
-    {
-        return $this->call(
-            api: Unspecced::getConfig,
+            api: Unspecced::getAtmosphereExploreTab,
             method: self::GET,
             params: compact($this->params(__METHOD__)),
         );
@@ -44,6 +35,60 @@ trait AppBskyUnspecced
     {
         return $this->call(
             api: Unspecced::getOnboardingSuggestedStarterPacksSkeleton,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getSuggestedFeeds(?int $limit = 10): Response
+    {
+        return $this->call(
+            api: Unspecced::getSuggestedFeeds,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getSuggestedFeedsSkeleton(?string $viewer = null, ?int $limit = 10): Response
+    {
+        return $this->call(
+            api: Unspecced::getSuggestedFeedsSkeleton,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getSuggestedStarterPacks(?int $limit = 10): Response
+    {
+        return $this->call(
+            api: Unspecced::getSuggestedStarterPacks,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getSuggestedStarterPacksSkeleton(?string $viewer = null, ?int $limit = 10): Response
+    {
+        return $this->call(
+            api: Unspecced::getSuggestedStarterPacksSkeleton,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getAgeAssuranceState(): Response
+    {
+        return $this->call(
+            api: Unspecced::getAgeAssuranceState,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
+    public function getConfig(): Response
+    {
+        return $this->call(
+            api: Unspecced::getConfig,
             method: self::GET,
             params: compact($this->params(__METHOD__)),
         );
@@ -85,46 +130,10 @@ trait AppBskyUnspecced
         );
     }
 
-    public function getSuggestedFeeds(?int $limit = 10): Response
-    {
-        return $this->call(
-            api: Unspecced::getSuggestedFeeds,
-            method: self::GET,
-            params: compact($this->params(__METHOD__)),
-        );
-    }
-
-    public function getSuggestedFeedsSkeleton(?string $viewer = null, ?int $limit = 10): Response
-    {
-        return $this->call(
-            api: Unspecced::getSuggestedFeedsSkeleton,
-            method: self::GET,
-            params: compact($this->params(__METHOD__)),
-        );
-    }
-
     public function getSuggestedOnboardingUsers(?string $category = null, ?int $limit = 25): Response
     {
         return $this->call(
             api: Unspecced::getSuggestedOnboardingUsers,
-            method: self::GET,
-            params: compact($this->params(__METHOD__)),
-        );
-    }
-
-    public function getSuggestedStarterPacks(?int $limit = 10): Response
-    {
-        return $this->call(
-            api: Unspecced::getSuggestedStarterPacks,
-            method: self::GET,
-            params: compact($this->params(__METHOD__)),
-        );
-    }
-
-    public function getSuggestedStarterPacksSkeleton(?string $viewer = null, ?int $limit = 10): Response
-    {
-        return $this->call(
-            api: Unspecced::getSuggestedStarterPacksSkeleton,
             method: self::GET,
             params: compact($this->params(__METHOD__)),
         );

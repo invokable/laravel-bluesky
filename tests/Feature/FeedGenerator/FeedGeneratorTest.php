@@ -107,7 +107,7 @@ class FeedGeneratorTest extends TestCase
         $response = $this->get(route('bluesky.feed.describe'));
 
         $response->assertSuccessful();
-        $response->assertJson(['did' => 'did:web:localhost', 'feeds' => ['at://did:web:localhost/app.bsky.feed.generator/test']]);
+        $response->assertJson(['did' => 'did:web:localhost:8000', 'feeds' => ['at://did:web:localhost:8000/app.bsky.feed.generator/test']]);
     }
 
     public function test_feed_did(): void

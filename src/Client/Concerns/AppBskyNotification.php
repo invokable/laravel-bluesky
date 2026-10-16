@@ -13,6 +13,15 @@ use Revolution\AtProto\Lexicon\Contracts\App\Bsky\Notification;
 
 trait AppBskyNotification
 {
+    public function getGroupedNotifications(?string $feed = 'all', ?int $limit = 30, ?string $cursor = null): Response
+    {
+        return $this->call(
+            api: Notification::getGroupedNotifications,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function getPreferences(): Response
     {
         return $this->call(

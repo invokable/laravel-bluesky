@@ -13,6 +13,15 @@ use Revolution\AtProto\Lexicon\Contracts\Tools\Ozone\Server;
 
 trait ToolsOzoneServer
 {
+    public function getCapabilities(): Response
+    {
+        return $this->call(
+            api: Server::getCapabilities,
+            method: self::GET,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function getConfig(): Response
     {
         return $this->call(

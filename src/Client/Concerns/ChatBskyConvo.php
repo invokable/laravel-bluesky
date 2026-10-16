@@ -13,6 +13,15 @@ use Revolution\AtProto\Lexicon\Contracts\Chat\Bsky\Convo;
 
 trait ChatBskyConvo
 {
+    public function leaveConvo(string $convoId): Response
+    {
+        return $this->call(
+            api: Convo::leaveConvo,
+            method: self::POST,
+            params: compact($this->params(__METHOD__)),
+        );
+    }
+
     public function acceptConvo(string $convoId): Response
     {
         return $this->call(
@@ -99,15 +108,6 @@ trait ChatBskyConvo
         return $this->call(
             api: Convo::getUnreadCounts,
             method: self::GET,
-            params: compact($this->params(__METHOD__)),
-        );
-    }
-
-    public function leaveConvo(string $convoId): Response
-    {
-        return $this->call(
-            api: Convo::leaveConvo,
-            method: self::POST,
             params: compact($this->params(__METHOD__)),
         );
     }
