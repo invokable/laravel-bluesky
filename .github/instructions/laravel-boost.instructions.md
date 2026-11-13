@@ -28,7 +28,7 @@ Before relying on a package's API, confirm its installed version:
 
 ## Frontend Bundling
 
-- If a frontend change doesn't show in the UI or you get a "Unable to locate file in Vite manifest" error, run `npm run build` or ask the user to run `npm run dev` or `composer run dev`.
+- If a frontend change doesn't show in the UI or you get a "Unable to locate file in Vite manifest" error, run `npm run build` or ask the user to run `npm run dev`.
 
 ## Documentation Files
 
